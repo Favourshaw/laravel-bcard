@@ -7,6 +7,11 @@ Route::get('/', function () {
     return Inertia::render('home/index');
 })->name('home');
 
+Route::get('/about', function () {
+    return Inertia::render('home/about');
+})->name('about');
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
