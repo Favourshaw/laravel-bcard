@@ -7,11 +7,9 @@ import React from 'react';
 interface HomeLayoutProps {
     children: React.ReactNode;
     breadcrumbs?: BreadcrumbItem[];
-    title?: string;
-    description?: string;
 }
 
-const HomeLayout: React.FC<HomeLayoutProps> = ({ children, breadcrumbs = [], title = 'Home', description, ...props }) => {
+const HomeLayout: React.FC<HomeLayoutProps> = ({ children, breadcrumbs = [] }) => {
     return (
         <>
             <AnimatePresence mode="wait">

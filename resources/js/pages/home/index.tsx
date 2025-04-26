@@ -1,6 +1,6 @@
 import HomeLayout from '@/layouts/home-layout';
-import { type BreadcrumbItem, type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -10,8 +10,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Welcome() {
-    const { auth } = usePage<SharedData>().props;
-
     return (
         <HomeLayout breadcrumbs={breadcrumbs}>
             <Head title="Home" />
