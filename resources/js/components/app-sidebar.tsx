@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BrainCog, ChartNoAxesColumnIncreasing, CircleUser, Headset, LayoutGrid, PencilRuler } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -13,18 +13,41 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+
+    {
+        title: 'Design Template',
+        href: '/template',
+        icon: PencilRuler,
+    },
+
+    {
+        title: 'Analytic',
+        href: '/analytic',
+        icon: ChartNoAxesColumnIncreasing,
+    },
+    {
+        title: 'Profile',
+        href: '/profile',
+        icon: CircleUser,
+    },
+
+    {
+        title: 'Manage Users',
+        href: '/users',
+        icon: CircleUser,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Settings',
+        href: '/settings',
+        icon: BrainCog,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
+        title: 'Support',
+        href: '/support',
+        icon: Headset,
     },
 ];
 

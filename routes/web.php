@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,8 +15,12 @@ Route::get('/about', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return Inertia::render('user/dashboard');
     })->name('dashboard');
+    Route::get('template', function () {
+        return Inertia::render('user/template');
+    })->name('template');
+    Route::resource("users", (UserController::class));
 });
 
 require __DIR__.'/settings.php';
