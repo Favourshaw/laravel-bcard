@@ -34,7 +34,7 @@ export default function Users({ users }: UsersPageProps) {
                                 <TableHead className="w-[100px]">ID</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Email</TableHead>
-                                <TableHead className="text-right">btn</TableHead>
+                                <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -44,7 +44,11 @@ export default function Users({ users }: UsersPageProps) {
                                     <TableCell>{user.name}</TableCell>
                                     <TableCell>{user.email}</TableCell>
 
-                                    <TableCell className="text-right">btn</TableCell>
+                                    <TableCell className="text-right">
+                                        <Button variant="secondary" asChild>
+                                            <Link href={route('users.edit', user.id)}>Edit User</Link>
+                                        </Button>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
