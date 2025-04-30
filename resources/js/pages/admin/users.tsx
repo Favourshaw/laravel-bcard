@@ -46,6 +46,9 @@ export default function Users({ users }: UsersPageProps) {
 
                                     <TableCell className="text-right">
                                         <Button variant="secondary" asChild>
+                                            <Link href={route('users.show', user.id)}>View details</Link>
+                                        </Button>
+                                        <Button variant="secondary" asChild>
                                             <Link href={route('users.edit', user.id)}>Edit User</Link>
                                         </Button>
 

@@ -52,7 +52,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return Inertia::render('admin/show', [
+            'user' => $user,
+        ]);
+
     }
 
     /**
