@@ -16,6 +16,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',  // Add this
         'password',
     ];
 
@@ -23,6 +24,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    // Add this for route model binding
+    public function getRouteKeyName()
+    {
+        return 'username'; // Use username for URLs
+    }
 
     protected function casts(): array
     {
@@ -68,7 +75,7 @@ class User extends Authenticatable
         $qrCode = new QrCode(route('profiles.info', $this));
         $qrCode->setSize(200);
 
-        $path = "qrcodes/{$this->name}.png";
+        $path = "qrcodes/{$this->username}.png";
         (new PngWriter())->write($qrCode)->saveToFile(storage_path("app/public/{$path}"));
 
         return $path;

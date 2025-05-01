@@ -15,7 +15,7 @@ Route::get('/about', function () {
     return Inertia::render('home/about');
 })->name('about');
 
-Route::get('profiles/{user:id}', [ControllersProfileController::class, 'info'])
+Route::get('profiles/{user:username}', [ControllersProfileController::class, 'info'])
     ->name('profiles.info');
 
 
