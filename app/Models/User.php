@@ -34,20 +34,7 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne(Profile::class)->select([
-            'user_id',
-            'logo',
-            'phone',
-            'bio',
-            'location',
-            'facebook',
-            'tweeter',
-            'instagram',
-            'tiktok',
-            'whatsapp',
-            'qr',
-            'social_links'
-        ]);
+        return $this->hasOne(Profile::class);
     }
 
     protected static function booted()
@@ -78,7 +65,7 @@ class User extends Authenticatable
 
     public function generateQrCode()
     {
-        $qrCode = new QrCode(route('profiles.show', $this));
+        $qrCode = new QrCode(route('profiles.info', $this));
         $qrCode->setSize(200);
 
         $path = "qrcodes/{$this->name}.png";

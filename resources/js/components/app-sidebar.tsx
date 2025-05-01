@@ -30,7 +30,7 @@ export function AppSidebar() {
         },
         {
             title: 'Profile',
-            href: '/profile',
+            href: '/profiles',
             icon: CircleUser,
         },
     ];
