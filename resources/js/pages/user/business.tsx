@@ -70,8 +70,7 @@ export default function BusinessProfile({ profileData, isOwner = false }: UsersP
                 text: `Check out ${user.name}'s business profile`,
                 url: profileUrl,
             });
-        } catch (err) {
-            // Fallback for browsers that don't support Web Share API
+        } catch {
             navigator.clipboard.writeText(profileUrl);
             alert('Profile link copied to clipboard!');
         }
