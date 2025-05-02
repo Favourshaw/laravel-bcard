@@ -85,6 +85,7 @@ class ProfileController extends Controller
                 'bio',
                 'location',
                 'facebook',
+                'slogan',
                 'tweeter as twitter',
                 'instagram',
                 'tiktok',
@@ -108,6 +109,7 @@ class ProfileController extends Controller
                     'location',
                     'facebook',
                     'twitter',
+                    'slogan',
                     'instagram',
                     'tiktok',
                     'whatsapp',
@@ -137,6 +139,8 @@ class ProfileController extends Controller
 
 
 
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -147,6 +151,7 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'logo' => 'nullable|image|max:2048', // file input validation
             'phone' => 'nullable|string|max:20',
+            'slogan' => 'nullable|string|max:30',
             'bio' => 'nullable|string|max:1000',
             'location' => 'nullable|string|max:255',
             'facebook' => 'nullable|url',
@@ -176,6 +181,7 @@ class ProfileController extends Controller
         $profile->tweeter = $validated['twitter'] ?? $profile->tweeter;
         $profile->instagram = $validated['instagram'] ?? $profile->instagram;
         $profile->tiktok = $validated['tiktok'] ?? $profile->tiktok;
+        $profile->slogan = $validated['slogan'] ?? $profile->slogan;
         $profile->whatsapp = $validated['whatsapp'] ?? $profile->whatsapp;
 
         $profile->save();

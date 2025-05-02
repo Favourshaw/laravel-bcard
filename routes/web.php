@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController as ControllersProfileController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('home/about');
 })->name('about');
+Route::get('/tests', function () {
+    return Inertia::render('user/test');
+})->name('test');
 
 Route::middleware(['auth', 'verified', 'role:admin,superadmin'])->group(function () {
     Route::get("/admin/dashboard", [TestController::class, "admin"])->name("admin");
@@ -26,9 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('user/dashboard');
     })->name('dashboard');
-    Route::get('template', function () {
-        return Inertia::render('user/template');
-    })->name('template');
+
+    Route::get('/template', [TemplateController::class, 'index']);
+    Route::post('/template/save-style', [TemplateController::class, 'saveStyle']);
     Route::get('profiles/edits', [ControllersProfileController::class, 'edits'])->name('profiles.edits');
     Route::resource("profiles", (ControllersProfileController::class))->except(['info', 'edits']);
 });

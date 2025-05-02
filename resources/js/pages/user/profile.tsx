@@ -5,6 +5,7 @@ import { User, type BreadcrumbItem } from '@/types';
 import { PageProps } from '@inertiajs/core';
 import { Head, Link } from '@inertiajs/react';
 import { Pencil } from 'lucide-react';
+import Test from './test';
 
 interface UsersPageProps extends PageProps {
     user: User & {
@@ -48,6 +49,9 @@ export default function Profile({ user }: UsersPageProps) {
                 {/* Profile Sections */}
                 <div className="grid gap-6 md:grid-cols-3">
                     <CardContent>{profile.bio ? <p>{profile.bio}</p> : <p className="text-muted">No bio provided</p>}</CardContent>
+                </div>
+                <div className="grid gap-6 md:grid-cols-3">
+                    <Test />
                 </div>
             </div>
         </AppLayout>

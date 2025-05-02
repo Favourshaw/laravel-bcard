@@ -19,6 +19,7 @@ class Profile extends Model
         'facebook',
         'tweeter', // Consider renaming to 'twitter' for consistency
         'instagram',
+        'slogan',
         'tiktok',
         'whatsapp',
         'qr',

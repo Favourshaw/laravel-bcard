@@ -93,6 +93,7 @@ export default function Edit({ user }: EditProps) {
                             { name: 'instagram', label: 'Instagram' },
                             { name: 'tiktok', label: 'TikTok' },
                             { name: 'whatsapp', label: 'WhatsApp' },
+                            { name: 'slogan', label: 'Slogan' },
                         ].map(({ name, label }) => (
                             <div key={name}>
                                 <Label className="block text-sm font-medium">{label}</Label>

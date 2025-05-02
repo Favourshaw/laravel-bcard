@@ -16,8 +16,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'username',  // Add this
+        'username',
         'password',
+        'card_style',
+        'card_bg_color',
+        'card_text_color',
+        'card_bg_gradient',
+        'card_bg_type',
     ];
 
     protected $hidden = [
@@ -25,10 +30,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // Add this for route model binding
+
     public function getRouteKeyName()
     {
-        return 'username'; // Use username for URLs
+        return 'username';
     }
 
     protected function casts(): array
