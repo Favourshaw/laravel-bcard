@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProfileController extends Controller
@@ -65,6 +66,11 @@ class ProfileController extends Controller
         //
     }
 
+    public function edit(Request $request)
+    {
+        //
+    }
+
     /**
      * Display the specified resource.
      */
@@ -116,10 +122,20 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Profile $profile)
+    public function edits()
     {
-        //
+        $user = Auth::user()->load('profile');
+
+        return Inertia::render('user/edit-profile', [
+            'user' => [
+                'id' => $user->id,
+                'profile' => $user->profile,
+            ],
+        ]);
     }
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -129,37 +145,47 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'bio' => 'nullable|string|max:800',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'location' => 'nullable|string|max:100',
-            'phone' => 'nullable|string|max:30',
-            'facebook' => 'nullable|string|max:100',
-            'tweeter' => 'nullable|string|max:100',
-            'instagram' => 'nullable|string|max:100',
-            'tiktok' => 'nullable|string|max:100',
-            'whatsapp' => 'nullable|string|max:100',
-            'qr' => 'nullable|string|max:100',
-            'social_links' => 'nullable|array',
-            'social_links.*' => 'nullable|url'
+            'logo' => 'nullable|image|max:2048', // file input validation
+            'phone' => 'nullable|string|max:20',
+            'bio' => 'nullable|string|max:1000',
+            'location' => 'nullable|string|max:255',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'tiktok' => 'nullable|url',
+            'whatsapp' => 'nullable|string|max:20',
         ]);
 
-        // Handle avatar upload
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $validated['avatar'] = $path;
-        } else {
-            unset($validated['avatar']);
+        $profile = $user->profile ?? new Profile(['user_id' => $user->id]);
+
+        // ✅ Handle logo upload
+        if ($request->hasFile('logo')) {
+            // Delete old logo if it exists
+            if ($profile->logo) {
+                Storage::disk('public')->delete($profile->logo);
+            }
+
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $profile->logo = $logoPath;
         }
 
-        // Update or create profile
-        if ($user->profile) {
-            $user->profile()->update($validated);
-        } else {
-            $user->profile()->create($validated);
-        }
+        $profile->phone = $validated['phone'] ?? $profile->phone;
+        $profile->bio = $validated['bio'] ?? $profile->bio;
+        $profile->location = $validated['location'] ?? $profile->location;
+        $profile->facebook = $validated['facebook'] ?? $profile->facebook;
+        $profile->tweeter = $validated['twitter'] ?? $profile->tweeter;
+        $profile->instagram = $validated['instagram'] ?? $profile->instagram;
+        $profile->tiktok = $validated['tiktok'] ?? $profile->tiktok;
+        $profile->whatsapp = $validated['whatsapp'] ?? $profile->whatsapp;
 
-        return redirect()->back()->with('success', 'Profile updated successfully');
+        $profile->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -3,7 +3,7 @@ import { CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { User, type BreadcrumbItem } from '@/types';
 import { PageProps } from '@inertiajs/core';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Pencil } from 'lucide-react';
 
 interface UsersPageProps extends PageProps {
@@ -40,7 +40,7 @@ export default function Profile({ user }: UsersPageProps) {
                     <div className="ml-auto">
                         <Button variant="outline" className="gap-2">
                             <Pencil className="h-4 w-4" />
-                            Edit Profile
+                            <Link href={route('profiles.edits')}>Edit Profile</Link>
                         </Button>
                     </div>
                 </div>

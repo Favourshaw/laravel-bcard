@@ -50,3 +50,17 @@ export interface User {
     updated_at: string;
     [key: string]: unknown;
 }
+
+export interface ProfileFormData {
+    _method: string;
+    logo: File | null;
+    phone: string;
+    bio: string;
+    location: string;
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    tiktok: string;
+    whatsapp: string;
+    [key: string]: string | File | null;
+}
