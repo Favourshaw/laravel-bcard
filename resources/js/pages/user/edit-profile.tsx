@@ -7,7 +7,7 @@ import { PageProps } from '@inertiajs/core';
 import { Head, useForm } from '@inertiajs/react';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler, useRef, useState } from 'react';
+import { FormEventHandler } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -35,8 +35,6 @@ interface EditProps extends PageProps {
 
 export default function Edit({ user }: EditProps) {
     const profile = user?.profile ?? {};
-    const [preview, setPreview] = useState<string | null>(profile.logo ?? null);
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const { data, setData, post, processing, errors } = useForm<ProfileFormData>({
         _method: 'PUT',
@@ -50,16 +48,6 @@ export default function Edit({ user }: EditProps) {
         tiktok: profile.tiktok || '',
         whatsapp: profile.whatsapp || '',
     });
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        setData('logo', file || null);
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => setPreview(reader.result as string);
-            reader.readAsDataURL(file);
-        }
-    };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
