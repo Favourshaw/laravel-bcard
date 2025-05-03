@@ -152,9 +152,26 @@
 @layer base {
     * {
         @apply border-border;
+
+        font-family: 'Sora', sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
     }
 
     body {
         @apply bg-background text-foreground;
+    }
+
+    .card-text {
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0%;
+    }
+
+    .card-title {
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 8%;
+        line-height: 20px;
     }
 }
