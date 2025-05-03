@@ -151,7 +151,7 @@ export default function Template() {
                             initial={{ rotateY: 90, opacity: 0 }}
                             animate={{ rotateY: 0, opacity: 1 }}
                             exit={{ rotateY: -90, opacity: 0 }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.6 }}
                         >
                             <CardComponent
                                 isBack={flipped}
@@ -200,9 +200,9 @@ export default function Template() {
                                 <div className="card-container" key={index} onClick={() => handleStyleChange(styles[index], index)}>
                                     <Component
                                         isBack={false}
-                                        bgColor="#1d4ed8"
-                                        textColor="#fff"
-                                        bgGradient="linear-gradient(to right, #4f46e5, #3b82f6)"
+                                        bgColor="white"
+                                        textColor="black"
+                                        bgGradient="linear-gradient(to right, white,white)"
                                         bgType={index % 2 === 0 ? 'solid' : 'gradient'}
                                         user={user}
                                     />
@@ -373,8 +373,9 @@ export default function Template() {
                     display: grid;
                     grid-template-rows: repeat(3, 1fr);
                     grid-auto-flow: column;
-                    grid-auto-columns: minmax(250px, 1fr);
+                    grid-auto-columns: minmax(300px, 1fr);
                     gap: 16px;
+                    max-width: 300px;
                     height: 100%;
                     padding: 16px;
                 }
