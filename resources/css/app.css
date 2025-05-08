@@ -25,6 +25,7 @@
     --color-popover-foreground: var(--popover-foreground);
 
     --color-primary: #001f3f;
+    --color-grey: #f9fafb;
     --color-primary-foreground: var(--primary-foreground);
 
     --color-secondary: var(--secondary);
@@ -174,5 +175,13 @@
         font-size: 16px;
         letter-spacing: 8%;
         line-height: 20px;
+    }
+
+    .md-text {
+        font-size: clamp(16px, 2.5vw, 20px);
+    }
+
+    .lg-text {
+        font-size: clamp(18px, 2.5vw, 24px);
     }
 }

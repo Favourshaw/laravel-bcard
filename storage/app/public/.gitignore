@@ -1,5 +1,4 @@
-*
 !.gitignore
-!/home/
+!home/
 !/defaults/
 !/cards/
