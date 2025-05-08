@@ -1,2 +1,5 @@
 *
 !.gitignore
+!/home/
+!/defaults/
+!/cards/
