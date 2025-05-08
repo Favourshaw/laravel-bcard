@@ -132,10 +132,6 @@ export default function Template() {
         }
     };
 
-    const applyPresetGradient = (gradient: string) => {
-        setData('card_bg_gradient', gradient);
-    };
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Template" />
