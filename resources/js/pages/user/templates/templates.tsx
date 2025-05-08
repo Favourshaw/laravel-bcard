@@ -6,7 +6,6 @@ interface CardProps {
     textColor: string;
     bgGradient?: string;
     bgType?: 'solid' | 'gradient';
-
     user?: {
         name: string;
         username: string;
@@ -43,7 +42,7 @@ export function Card1({ isBack, bgColor, textColor, bgGradient, bgType = 'solid'
                     <div className="m-[-16px] mb-0 h-11 rounded-t-lg bg-cover bg-bottom bg-no-repeat" style={{ backgroundImage: headerImage }}></div>
                     <div className="mb-2 flex flex-row justify-between">
                         <div className="flex flex-col justify-end gap-2 text-left">
-                            <h2 className="card-title">{data.username}</h2>
+                            <h2 className="card-title">{user.username}</h2>
                             <div className="card-text flex flex-row gap-1 text-left">
                                 <FaRegEnvelope /> <span>{user.email}</span>
                             </div>

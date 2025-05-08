@@ -214,45 +214,82 @@ export default function Template() {
 
                 {/* Background controls */}
                 <div className="rounded-lg border p-4">
-                    <div className="mb-4 flex justify-center gap-4">
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="radio"
-                                checked={data.card_bg_type === 'solid'}
-                                onChange={() => setData('card_bg_type', 'solid')}
-                                className="h-4 w-4"
-                            />
-                            Solid Color
-                        </label>
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="radio"
-                                checked={data.card_bg_type === 'gradient'}
-                                onChange={() => setData('card_bg_type', 'gradient')}
-                                className="h-4 w-4"
-                            />
-                            Gradient
-                        </label>
-                    </div>
+                    <main className="mb-3 grid w-full place-items-center">
+                        <div className="grid w-[16rem] grid-cols-2 gap-2 rounded-xl bg-gray-200 p-2">
+                            {[
+                                { label: 'Solid Color', value: 'solid' },
+                                { label: 'Gradient', value: 'gradient' },
+                            ].map((option, index) => (
+                                <div key={option.value}>
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        id={String(index + 1)}
+                                        value={option.value}
+                                        className="peer hidden"
+                                        checked={data.card_bg_type === option.value}
+                                        onChange={() => setData('card_bg_type', option.value)}
+                                    />
+                                    <label
+                                        htmlFor={String(index + 1)}
+                                        className={`peer-checked:bg-primary block cursor-pointer rounded-xl p-2 text-center select-none peer-checked:font-bold peer-checked:text-white`}
+                                    >
+                                        {option.label}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    </main>
 
-                    {data.card_bg_type === 'solid' ? (
-                        <div className="flex justify-center">
-                            <div className="flex flex-col items-center gap-2">
-                                <label className="block text-sm font-medium">Background Color</label>
+                    <AnimatePresence mode="wait">
+                        {data.card_bg_type === 'solid' ? (
+                            <motion.div
+                                key="solid"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.25 }}
+                                className="flex justify-center"
+                            >
                                 <input
                                     type="color"
                                     value={data.card_bg_color}
                                     onChange={(e) => setData('card_bg_color', e.target.value)}
-                                    className="h-10 w-16 cursor-pointer"
+                                    className="h-10 w-24 rounded border"
                                 />
+                            </motion.div>
+                        ) : (
+                            <div>
+                                <div className="text-center">Preset Gradient</div>
+                                <motion.div
+                                    key="gradient"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="flex flex-wrap justify-center gap-2"
+                                >
+                                    {presetGradients.map((gradient, index) => (
+                                        <div
+                                            key={index}
+                                            onClick={() => setData('card_bg_gradient', gradient)}
+                                            className="h-10 w-10 cursor-pointer rounded border"
+                                            style={{ background: gradient }}
+                                        />
+                                    ))}
+                                </motion.div>
                             </div>
-                        </div>
+                        )}
+                    </AnimatePresence>
+
+                    {data.card_bg_type === 'solid' ? (
+                        <div className="flex justify-center"></div>
                     ) : (
                         <div className="space-y-4">
                             <div className="flex justify-center gap-4">
                                 {extractGradientColors(data.card_bg_gradient).map((color, index) => (
                                     <div key={index} className="flex flex-col items-center gap-2">
-                                        <label className="block text-sm font-medium">Color {index + 1}</label>
+                                        <div className="mt-2 block text-xs font-medium">Color {index + 1}</div>
                                         <input
                                             type="color"
                                             value={color}
@@ -264,7 +301,7 @@ export default function Template() {
                                                     `linear-gradient(${extractGradientAngle(data.card_bg_gradient)}deg, ${colors.join(', ')})`,
                                                 );
                                             }}
-                                            className="h-10 w-16 cursor-pointer"
+                                            className="h-10 w-10 cursor-pointer"
                                         />
                                     </div>
                                 ))}
@@ -287,21 +324,6 @@ export default function Template() {
                                     <option value="45">Diagonal Right</option>
                                     <option value="135">Diagonal Left</option>
                                 </select>
-                            </div>
-
-                            <div className="mt-4">
-                                <label className="mb-2 block text-sm font-medium">Preset Gradients</label>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {presetGradients.map((gradient, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => applyPresetGradient(gradient)}
-                                            className="h-8 w-8 rounded-full border"
-                                            style={{ background: gradient }}
-                                            title={`Preset ${index + 1}`}
-                                        />
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     )}

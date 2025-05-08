@@ -21,7 +21,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children, breadcrumbs = [] }) =
                 >
                     <HomeNav />
 
-                    <main className="min-h-screen bg-gray-50">
+                    <main className="min-h-screen bg-white">
                         {breadcrumbs.length > 0 && (
                             <div className="border-b border-gray-200 bg-white p-4">
                                 <nav className="flex" aria-label="Breadcrumb">
