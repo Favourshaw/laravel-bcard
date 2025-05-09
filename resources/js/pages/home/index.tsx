@@ -3,6 +3,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import Features from './index/features';
 import HeroSection from './index/hero';
+import Price from './index/price';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -17,6 +18,7 @@ export default function Welcome() {
             <Head title="Home" />
             <HeroSection />
             <Features />
+            <Price />
         </HomeLayout>
     );
 }
