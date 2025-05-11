@@ -49,7 +49,7 @@ export default function Price() {
     return (
         <div className="mx-auto max-w-6xl px-4 py-16 text-center">
             <motion.h2
-                className="mb-12 text-3xl font-bold"
+                className="text-primary mb-12 text-2xl font-bold"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -61,7 +61,7 @@ export default function Price() {
                 {pricingPlans.map((plan, index) => (
                     <motion.div
                         key={index}
-                        className="flex flex-col justify-between rounded-2xl bg-white p-6 shadow-md"
+                        className="flex flex-col justify-between rounded-2xl bg-white p-6 shadow-lg"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.2 }}
@@ -77,7 +77,7 @@ export default function Price() {
                             </div>
                             <ul className="mb-6 space-y-4 text-left">
                                 {plan.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-4 text-slate-600">
+                                    <li key={i} className="text-muted flex items-start gap-4 text-base">
                                         <span className="h-6 w-6">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="24" height="24" rx="12" fill="#D1FADF" />
