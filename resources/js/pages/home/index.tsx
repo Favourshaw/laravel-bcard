@@ -1,3 +1,4 @@
+import Faq from '@/components/faq';
 import HomeLayout from '@/layouts/home-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -21,6 +22,7 @@ export default function Welcome() {
             <Features />
             <Price />
             <Testimonials />
+            <Faq />
         </HomeLayout>
     );
 }
