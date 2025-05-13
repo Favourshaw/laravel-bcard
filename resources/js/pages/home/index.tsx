@@ -2,6 +2,7 @@ import Faq from '@/components/faq';
 import HomeLayout from '@/layouts/home-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import Cta from './index/cta';
 import Features from './index/features';
 import HeroSection from './index/hero';
 import Price from './index/price';
@@ -23,6 +24,7 @@ export default function Welcome() {
             <Price />
             <Testimonials />
             <Faq />
+            <Cta />
         </HomeLayout>
     );
 }
