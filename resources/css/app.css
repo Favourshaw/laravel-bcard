@@ -28,7 +28,7 @@
     --color-grey: #f9fafb;
     --color-primary-foreground: var(--primary-foreground);
 
-    --color-secondary: var(--secondary);
+    --color-secondary: #048ecb;
     --color-secondary-foreground: var(--secondary-foreground);
 
     --color-muted: var(--muted);

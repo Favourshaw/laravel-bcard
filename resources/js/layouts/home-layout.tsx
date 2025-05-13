@@ -3,6 +3,7 @@ import { HomeNav } from '@/components/home-nav';
 import { type BreadcrumbItem } from '@/types';
 import { AnimatePresence, motion } from 'motion/react';
 import React from 'react';
+import Footer from './home-footer';
 
 interface HomeLayoutProps {
     children: React.ReactNode;
@@ -59,6 +60,8 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children, breadcrumbs = [] }) =
 
                         <div className="mx-auto">{children}</div>
                     </main>
+
+                    <Footer />
                 </motion.div>
             </AnimatePresence>
         </>
