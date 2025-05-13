@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPlus, FiMinus, FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 interface FaqItemProps {
   title: string;
