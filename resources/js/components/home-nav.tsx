@@ -13,12 +13,16 @@ const homeNavItems: NavItem[] = [
         href: '/',
     },
     {
-        title: 'About',
-        href: '/about',
+        title: 'Pricing',
+        href: '/price',
     },
     {
-        title: 'Contact',
-        href: '/contact',
+        title: 'FAQ',
+        href: '/faq',
+    },
+    {
+        title: 'About',
+        href: '/about',
     },
 ];
 
@@ -55,17 +59,15 @@ export function HomeNav() {
     const navRef = useRef<HTMLElement>(null);
 
     return (
-        <header className="sticky top-0 z-50 bg-white/80 shadow-sm backdrop-blur-md dark:bg-neutral-900/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-50 bg-white/80 shadow-sm backdrop-blur-md">
+            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-3">
                 <div className="flex h-16 items-center justify-between">
-                    {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link href="/" className="flex items-center">
-                            <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">MyApp</span>
+                            <span className="text-xl font-bold text-indigo-600">MyApp</span>
                         </Link>
                     </div>
 
-                    {/* Desktop Navigation */}
                     <nav className="hidden md:block">
                         <ul className="flex space-x-8">
                             {homeNavItems.map((item) => (
@@ -84,7 +86,6 @@ export function HomeNav() {
                         </ul>
                     </nav>
 
-                    {/* Mobile Menu Button */}
                     <button
                         className="rounded-md p-2 text-gray-700 hover:text-indigo-600 focus:outline-none md:hidden"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -98,7 +99,6 @@ export function HomeNav() {
                         </svg>
                     </button>
 
-                    {/* Auth Buttons */}
                     <div className="hidden items-center space-x-4 md:flex">
                         {auth.user ? (
                             <Link
@@ -109,14 +109,11 @@ export function HomeNav() {
                             </Link>
                         ) : (
                             <>
-                                <Link
-                                    href={route('login')}
-                                    className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
-                                >
-                                    Log in
-                                </Link>
-                                <Button variant="secondary" asChild>
-                                    <Link href={route('register')}>Register</Link>
+                                <Button variant="secondary">
+                                    <Link href={route('login')}>Log in</Link>
+                                </Button>
+                                <Button>
+                                    <Link href={route('register')}>Sign up</Link>
                                 </Button>
                             </>
                         )}
