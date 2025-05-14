@@ -15,9 +15,10 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('home/about');
 })->name('about');
-Route::get('/tests', function () {
-    return Inertia::render('user/test');
-})->name('test');
+Route::get('/price', function () {
+    return Inertia::render('home/price');
+})->name('price');
+
 
 Route::middleware(['auth', 'verified', 'role:admin,superadmin'])->group(function () {
     Route::get("/admin/dashboard", [TestController::class, "admin"])->name("admin");
@@ -36,7 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profiles/edits', [ControllersProfileController::class, 'edits'])->name('profiles.edits');
     Route::resource("profiles", (ControllersProfileController::class))->except(['info', 'edits']);
 });
-
+Route::get('/tests', function () {
+    return Inertia::render('user/test');
+})->name('test');
 
 
 
