@@ -47,17 +47,8 @@ const pricingPlans = [
 
 export default function Price() {
     return (
-        <div className="mx-auto max-w-6xl px-4 py-16 text-center">
-            <motion.h2
-                className="text-primary mb-12 text-2xl font-bold"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                Pricing
-            </motion.h2>
-
-            <div className="grid gap-8 md:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {pricingPlans.map((plan, index) => (
                     <motion.div
                         key={index}

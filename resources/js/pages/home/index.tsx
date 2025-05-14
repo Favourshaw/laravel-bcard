@@ -2,6 +2,7 @@ import Faq from '@/components/faq';
 import HomeLayout from '@/layouts/home-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import Cta from './index/cta';
 import Features from './index/features';
 import HeroSection from './index/hero';
@@ -21,6 +22,14 @@ export default function Welcome() {
             <Head title="Home" />
             <HeroSection />
             <Features />
+            <motion.h2
+                className="text-primary my-12 text-center text-2xl font-bold"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                Pricing
+            </motion.h2>
             <Price />
             <Testimonials />
             <Faq />
