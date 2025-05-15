@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
 type FaqItem = {
@@ -108,7 +109,7 @@ const FaqBody = () => {
                     {faqData.map((item, index) => (
                         <motion.div
                             key={index}
-                            className="flex flex-col gap-4 rounded-xl bg-white p-4 shadow-sm"
+                            className="flex flex-col gap-4 rounded-xl bg-white p-4"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -124,14 +125,14 @@ const FaqBody = () => {
                         </motion.div>
                     ))}
                 </motion.div>
-
-                {/* Contact CTA */}
-                <div className="mx-auto mt-20 max-w-4xl rounded-xl bg-slate-50 p-6 text-center md:flex md:items-center md:justify-between md:p-10">
-                    <div className="mb-4 md:mb-0 md:text-left">
-                        <p className="text-lg font-semibold text-slate-800">Still have questions?</p>
-                        <p className="text-sm text-slate-600">Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
+                <div className="bg-grey mt-10 py-0 md:py-10">
+                    <div className="bg-grey mx-auto max-w-7xl rounded-xl p-6 md:mx-5 md:my-auto md:flex md:items-center md:justify-between md:bg-white md:p-10 md:text-center">
+                        <div className="mb-4 md:mb-0 md:text-left">
+                            <p className="text-primary mb-2 text-xl font-semibold">Still have questions?</p>
+                            <p className="text-text text-base">Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
+                        </div>
+                        <Button>Get in touch</Button>
                     </div>
-                    <button className="rounded-lg bg-slate-900 px-5 py-2 text-white transition hover:bg-slate-700">Get in touch</button>
                 </div>
             </section>
         </>
