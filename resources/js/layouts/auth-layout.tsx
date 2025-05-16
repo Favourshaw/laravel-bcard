@@ -20,7 +20,7 @@ export default function AuthLayout({ children, title, description, ...props }: {
                     </div>{' '}
                 </div>
             </div>
-            <div className="absolute right-0 bottom-0 left-0 flex items-end justify-center gap-2 bg-white">
+            <div className="fixed right-0 bottom-0 left-0 flex items-end justify-center gap-2 bg-white">
                 <img src="storage/auth/auth-footer.png" alt="Footer img" className="h-auto w-full object-contain" />
             </div>
         </AuthLayoutTemplate>
