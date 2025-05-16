@@ -1,6 +1,5 @@
 import Faq from '@/components/faq';
 import HomeLayout from '@/layouts/home-layout';
-import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import Cta from './index/cta';
@@ -8,13 +7,6 @@ import Features from './index/features';
 import HeroSection from './index/hero';
 import Price from './index/price';
 import Testimonials from './index/testimonial';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Home',
-        href: '/',
-    },
-];
 
 const homeFaqs = [
     {
@@ -34,7 +26,7 @@ const homeFaqs = [
 
 export default function Welcome() {
     return (
-        <HomeLayout breadcrumbs={breadcrumbs}>
+        <HomeLayout>
             <Head title="Home" />
             <HeroSection />
             <Features />
