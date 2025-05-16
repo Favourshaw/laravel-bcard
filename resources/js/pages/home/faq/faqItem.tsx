@@ -125,8 +125,8 @@ const FaqBody = () => {
                         </motion.div>
                     ))}
                 </motion.div>
-                <div className="bg-grey mt-10 py-0 md:py-10">
-                    <div className="bg-grey mx-auto max-w-7xl rounded-xl p-6 md:mx-5 md:my-auto md:flex md:items-center md:justify-between md:bg-white md:p-10 md:text-center">
+                <div className="bg-grey mt-10 flex w-full justify-center py-0 md:py-10">
+                    <div className="bg-grey mx-auto w-full max-w-7xl rounded-xl p-6 md:mx-5 md:my-auto md:flex md:items-center md:justify-between md:bg-white md:p-10 md:text-center">
                         <div className="mb-4 md:mb-0 md:text-left">
                             <p className="text-primary mb-2 text-xl font-semibold">Still have questions?</p>
                             <p className="text-text text-base">Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
