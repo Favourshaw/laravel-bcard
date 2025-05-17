@@ -1,29 +1,33 @@
-import { Icon } from '@/components/icon';
 import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { type ComponentPropsWithoutRef } from 'react';
+import { Link, usePage } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { Tally1 } from 'lucide-react';
 
-export function NavFooter({
-    items,
-    className,
-    ...props
-}: ComponentPropsWithoutRef<typeof SidebarGroup> & {
-    items: NavItem[];
-}) {
+export function NavFooter({ items = [] }: { items: NavItem[] }) {
+    const page = usePage();
     return (
-        <SidebarGroup {...props} className={`group-data-[collapsible=icon]:p-0 ${className || ''}`}>
+        <SidebarGroup className={`} group-data-[collapsible=icon]:p-0`}>
             <SidebarGroupContent>
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <SidebarMenuButton
-                                asChild
-                                className="text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-100"
-                            >
-                                <a href={item.href}>
-                                    {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
+                            <SidebarMenuButton asChild isActive={page.url.startsWith(item.href)} tooltip={{ children: item.title }}>
+                                <Link href={item.href} prefetch className="relative flex items-center">
+                                    {item.icon && <item.icon />}
                                     <span>{item.title}</span>
-                                </a>
+                                    {page.url.startsWith(item.href) && (
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 8 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: 8 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="text-primary absolute top-1/2 right-2 -translate-y-1/2"
+                                        >
+                                            <Tally1 />
+                                        </motion.div>
+                                    )}
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}

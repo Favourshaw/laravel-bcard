@@ -77,7 +77,7 @@ export function AppSidebar() {
     console.log('Current user role:', userRole, 'Type:', typeof userRole);
 
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" variant="inset" className="bg-white">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
