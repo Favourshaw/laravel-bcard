@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeftIcon } from "lucide-react"
+import { PanelLeftIcon, XCircleIcon, XIcon } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -38,6 +38,7 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+  
 }
 
 const SidebarContext = React.createContext<SidebarContext | null>(null)
@@ -253,27 +254,39 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, isOpen: sidebarOpen } = useSidebar()
+  const [localOpen, setLocalOpen] = React.useState(false)
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event)
+    setLocalOpen(!localOpen)
+    toggleSidebar()
+  }
 
   return (
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      variant="ghost"
+      variant="secondary"
       size="icon"
       className={cn("h-7 w-7", className)}
-      onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
-      }}
+      onClick={handleClick}
       {...props}
     >
-      <PanelLeftIcon />
+     
+      <span className="block md:hidden">
+        {localOpen ? <XCircleIcon /> : <PanelLeftIcon />}
+      </span>
+
+      
+      <span className="hidden md:block">
+        <PanelLeftIcon />
+      </span>
+
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
 }
-
 function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   const { toggleSidebar } = useSidebar()
 
