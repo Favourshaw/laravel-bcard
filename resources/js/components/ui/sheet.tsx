@@ -1,8 +1,9 @@
 import * as React from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
-import { XIcon } from "lucide-react"
+import { XCircleIcon, XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Button } from "./button"
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
@@ -70,9 +71,21 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
-          <XIcon className="size-4" />
-          <span className="sr-only">Close</span>
+        <SheetPrimitive.Close className="  absolute top-6 right-6 ">
+          <Button
+      data-sidebar="trigger"
+      data-slot="sidebar-trigger"
+      variant="default"
+      size="icon"
+      className={cn("h-7 w-7 border border-transparent", className)}
+    >
+         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#001E45"/>
+          <path d="M8 15.4922L15.7419 8" stroke="white" stroke-width="1.54839" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15.7419 15.4922L8 8" stroke="white" stroke-width="1.54839" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+
+          <span className="sr-only">Close</span></Button>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>

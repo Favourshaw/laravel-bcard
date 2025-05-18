@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeftIcon, XCircleIcon } from "lucide-react"
+import { Menu, PanelLeftIcon, XCircleIcon } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -190,7 +190,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+          className="bg-white text-sidebar-foreground w-full p-0 "
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -198,7 +198,7 @@ function Sidebar({
           }
           side={side}
         >
-          <div className="flex h-full w-full flex-col">{children}</div>
+          <div className="flex h-full w-full flex-col">{children}hi</div>
         </SheetContent>
       </Sheet>
     )
@@ -269,13 +269,13 @@ function SidebarTrigger({
       data-slot="sidebar-trigger"
       variant="secondary"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("h-7 w-7 border border-transparent", className)}
       onClick={handleClick}
       {...props}
     >
      
-      <span className="block md:hidden">
-        {localOpen ? <XCircleIcon /> : <PanelLeftIcon />}
+      <span className=" block md:hidden ">
+        <Menu />
       </span>
 
       
