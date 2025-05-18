@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeftIcon, XCircleIcon, XIcon } from "lucide-react"
+import { PanelLeftIcon, XCircleIcon } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -254,7 +254,7 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar, isOpen: sidebarOpen } = useSidebar()
+  const { toggleSidebar } = useSidebar()
   const [localOpen, setLocalOpen] = React.useState(false)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
