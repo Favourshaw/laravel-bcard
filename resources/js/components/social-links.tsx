@@ -17,7 +17,7 @@ export default function SocialLink({ icon, label, value }: SocialLinkProps) {
             setCopied(true);
             alert(`${label} copied to clipboard`);
             setTimeout(() => setCopied(false), 2000);
-        } catch (error) {
+        } catch {
             alert('Failed to copy');
         }
     };
