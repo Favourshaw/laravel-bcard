@@ -64,8 +64,8 @@ export default function Profile({ user }: UsersPageProps) {
                     </div>
 
                     <div className="prose max-w-none">
-                        <h2 className="font-semibold">About me</h2>
-                        <p>{profile.bio ? <p>{profile.bio}</p> : <p className="text-muted">No bio provided</p>}</p>
+                        <h2 className="text-text font-semibold">About me</h2>
+                        <p className="text-black">{profile.bio ? <p>{profile.bio}</p> : <p className="text-black">No bio provided</p>}</p>
                     </div>
 
                     <div className="">
@@ -73,7 +73,7 @@ export default function Profile({ user }: UsersPageProps) {
                     </div>
 
                     <div className="pt-4 text-center">
-                        <Button variant="default" size="sm" className="gap-2">
+                        <Button variant="default" size="sm" className="px-20 lg:mt-16">
                             <Link href={route('profiles.edits')}>Edit Profile</Link>
                         </Button>
                     </div>
