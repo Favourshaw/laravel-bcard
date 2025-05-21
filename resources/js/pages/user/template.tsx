@@ -54,7 +54,6 @@ export default function Template() {
         return () => window.removeEventListener('resize', update);
     }, []);
 
-    // Auto-hide scrollbar
     useEffect(() => {
         const el = gridContainerRef.current;
         if (!el) return;
@@ -136,7 +135,6 @@ export default function Template() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Template" />
             <div className="space-y-6">
-                {/* Card flip preview */}
                 <div className="relative flex flex-col items-center">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -162,7 +160,6 @@ export default function Template() {
 
                     <p className="mt-2 text-sm text-gray-500">Click card to flip</p>
 
-                    {/* Hidden front/back for download */}
                     <div className="absolute -z-50 h-0 w-0 overflow-hidden">
                         <div ref={frontRef}>
                             <CardComponent
@@ -187,7 +184,6 @@ export default function Template() {
                     </div>
                 </div>
 
-                {/* Template grid */}
                 <div className="rounded-lg border p-4">
                     <h3 className="mb-4 text-center text-lg font-medium">Select a Template</h3>
                     <div ref={gridContainerRef} className={`scroll-wrapper ${scrolling ? 'show-scroll' : ''}`}>
