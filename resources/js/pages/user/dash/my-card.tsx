@@ -17,9 +17,9 @@ const presetGradients = [
 export default function MyCard() {
     const { props } = usePage();
     const user = props.auth.user;
-    const [styleIndex, setStyleIndex] = useState(styles.indexOf(user.card_style || 'Card1'));
+    const [styleIndex] = useState(styles.indexOf(user.card_style || 'Card1'));
 
-    const { data, setData, post } = useForm({
+    const { data } = useForm({
         card_style: styles[styleIndex],
         card_bg_type: user.card_bg_type || 'solid',
         card_bg_color: user.card_bg_color || '#ffffff',
