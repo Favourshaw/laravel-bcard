@@ -29,9 +29,9 @@ export default function MyCard() {
     const CardComponent = CARD_COMPONENTS[styleIndex] || CARD_COMPONENTS[0];
 
     return (
-        <div className="flex flex-row items-center justify-start gap-5 p-4">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-5 p-4 sm:justify-start">
             <motion.div
-                className="h-[200px] w-[350px] cursor-pointer"
+                className="h-[200px] w-full cursor-pointer sm:w-[350px]"
                 initial={{ rotateY: 90, opacity: 0 }}
                 animate={{ rotateY: 0, opacity: 1 }}
                 exit={{ rotateY: -90, opacity: 0 }}
@@ -47,7 +47,7 @@ export default function MyCard() {
                 />
             </motion.div>
             <motion.div
-                className="h-[200px] w-[350px] cursor-pointer"
+                className="h-full w-full cursor-pointer sm:h-[200px] sm:w-[350px]"
                 initial={{ rotateY: 90, opacity: 0 }}
                 animate={{ rotateY: 0, opacity: 1 }}
                 exit={{ rotateY: -90, opacity: 0 }}
@@ -63,7 +63,7 @@ export default function MyCard() {
                 />
             </motion.div>
             <motion.div
-                className="flex h-[200px] w-[145px] cursor-pointer items-center justify-center"
+                className="flex max-h-[200px] w-[145px] cursor-pointer items-center justify-center"
                 initial={{ rotateY: 90, opacity: 0 }}
                 animate={{ rotateY: 0, opacity: 1 }}
                 exit={{ rotateY: -90, opacity: 0 }}
