@@ -39,14 +39,14 @@ export default function Edit({ user }: EditProps) {
     const { data, setData, post, processing, errors } = useForm<ProfileFormData>({
         _method: 'PUT',
         logo: null,
-        phone: profile.phone || '',
-        bio: profile.bio || '',
-        location: profile.location || '',
-        facebook: profile.facebook || '',
-        twitter: profile.twitter || '',
-        instagram: profile.instagram || '',
-        tiktok: profile.tiktok || '',
-        whatsapp: profile.whatsapp || '',
+        phone: user?.profile?.phone || '',
+        bio: user?.profile?.bio || '',
+        location: user?.profile?.location || '',
+        facebook: user?.profile?.facebook || '',
+        twitter: user?.profile?.twitter || '',
+        instagram: user?.profile?.instagram || '',
+        tiktok: user?.profile?.tiktok || '',
+        whatsapp: user?.profile?.whatsapp || '',
     });
 
     const submit: FormEventHandler = (e) => {
