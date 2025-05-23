@@ -87,7 +87,7 @@ export default function Edit({ user }: EditProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Profile" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+            <div className="flex h-full max-w-5xl flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="relative min-h-[100vh] flex-1 rounded-xl border bg-white p-6 dark:bg-neutral-900">
                     <form onSubmit={submit} className="space-y-6">
                         <div className="md:col-span-2">
