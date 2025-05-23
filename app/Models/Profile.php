@@ -17,14 +17,23 @@ class Profile extends Model
         'bio',
         'location',
         'facebook',
-        'tweeter', // Consider renaming to 'twitter' for consistency
+        'tweeter',
         'instagram',
         'slogan',
         'tiktok',
         'whatsapp',
         'qr',
-        'social_links'
+        'social_links',
+        'linkedin',
+        'snapchat',
+        'github',
+        'others',
+        'bname',
+        'bmail',
+        'behance',
+        'dribble',
     ];
+
 
     protected $casts = [
         'social_links' => 'array',
