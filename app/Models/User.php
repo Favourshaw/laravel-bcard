@@ -23,6 +23,8 @@ class User extends Authenticatable
         'card_text_color',
         'card_bg_gradient',
         'card_bg_type',
+        'theme_template',
+        'theme_palette',
     ];
 
     protected $hidden = [
