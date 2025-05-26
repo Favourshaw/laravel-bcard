@@ -20,11 +20,13 @@ export default function NotFound() {
                         <p className="mb-6 text-lg text-slate-600">
                             Sorry, the page you are looking for doesn’t exist or has been moved. Try searching our site:
                         </p>
-                        <div className="flex justify-center gap-4 lg:justify-start">
-                            <Button onClick={() => window.history.back()} variant="secondary">
+                        <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
+                            <Button onClick={() => window.history.back()} variant="secondary" className="w-full md:w-auto">
                                 <ArrowBigLeft /> Go back
                             </Button>
-                            <Button onClick={() => router.visit('/')}>Take me home</Button>
+                            <Button onClick={() => router.visit('/')} className="w-full md:w-auto">
+                                Take me home
+                            </Button>
                         </div>
                     </motion.div>
 
