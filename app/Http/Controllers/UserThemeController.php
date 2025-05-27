@@ -4,19 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class UserThemeController extends Controller
 {
     public function update(Request $request)
     {
         $request->validate([
-            'theme_template' => 'required|string',
-            'theme_palette' => 'required|string',
+            'theme' => 'required|string',
+            'colors' => 'required|array',
+            'colors.primary' => 'required|string',
+            'colors.secondary' => 'required|string',
+            'colors.text' => 'required|string',
         ]);
 
-        $user = Auth::user();
-        $user->update($request->only(['theme_template', 'theme_palette']));
+        $user = auth()->user();
 
-        return response()->json(['message' => 'Theme updated successfully']);
+        $user->update([
+            'theme' => $request->theme,
+            'colors' => $request->colors,
+        ]);
+
+        return back()->with('success', 'Customization saved!');
     }
 }
