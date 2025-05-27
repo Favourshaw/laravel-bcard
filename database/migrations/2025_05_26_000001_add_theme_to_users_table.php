@@ -14,8 +14,8 @@ class AddThemeToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('theme_template')->default('modern');
-            $table->string('theme_palette')->default('blue');
+            $table->string('theme')->nullable();
+            $table->json('colors')->nullable();
         });
     }
     public function down()
