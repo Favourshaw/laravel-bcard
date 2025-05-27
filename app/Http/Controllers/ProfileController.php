@@ -62,6 +62,8 @@ class ProfileController extends Controller
                     'name' => $user->name,
                     'username' => $user->username,
                     'created_at' => $user->created_at,
+                    'theme' => $user->theme,
+                    'colors' => $user->colors,
                 ],
                 'profile' => $user->profile ? $user->profile->only([
                     'logo',
@@ -90,6 +92,7 @@ class ProfileController extends Controller
             'canEdit' => auth()->check() && auth()->id() === $user->id
         ]);
     }
+
 
     public function edits()
     {

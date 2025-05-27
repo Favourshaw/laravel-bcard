@@ -8,6 +8,7 @@ use App\Http\Controllers\UserThemeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\http\Middleware\RoleMiddleware;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return Inertia::render('home/index');
@@ -40,8 +41,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/template/save-style', [TemplateController::class, 'saveStyle']);
     Route::get('profiles/edits', [ControllersProfileController::class, 'edits'])->name('profiles.edits');
     Route::resource("profiles", (ControllersProfileController::class))->except(['info', 'edits']);
-    // routes/web.php
-    Route::middleware(['auth'])->post('/user/theme', [UserThemeController::class, 'update']);
+    Route::get('/customize', function () {
+        return Inertia::render('user/customize', [
+            'user' => Auth::user(),
+        ]);
+    })->name('customization.index');
+
+    Route::post('/customize', [UserThemeController::class, 'update'])
+        ->name('customize.update');
 });
 Route::get('/tests', function () {
     return Inertia::render('user/test');

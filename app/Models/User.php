@@ -23,8 +23,8 @@ class User extends Authenticatable
         'card_text_color',
         'card_bg_gradient',
         'card_bg_type',
-        'theme_template',
-        'theme_palette',
+        'theme',
+        'colors',
     ];
 
     protected $hidden = [
@@ -45,6 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    protected $casts = [
+        'colors' => 'array',
+    ];
 
     public function profile()
     {
