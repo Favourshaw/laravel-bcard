@@ -3,9 +3,8 @@ import { Button } from '@/components/ui/button';
 import HomeLayout from '@/layouts/home-layout';
 import { type BreadcrumbItem } from '@/types';
 import { PageProps } from '@inertiajs/core';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { Link as LinkIcon, MapPin, Phone, Share2 } from 'lucide-react';
-import { FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 interface UsersPageProps extends PageProps {
     profileData: {
@@ -134,39 +133,6 @@ export default function retroTheme({ profileData, isOwner = false }: UsersPagePr
                             <Button variant="ghost" size="sm">
                                 Edit Profile
                             </Button>
-                        )}
-                    </div>
-
-                    <div className="mt-4 flex flex-wrap gap-4">
-                        {profile.facebook && (
-                            <Link href={profile.facebook} className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-100">
-                                <FaFacebook className="h-5 w-5 text-blue-600" />
-                                <span>Facebook</span>
-                            </Link>
-                        )}
-                        {profile.twitter && (
-                            <a href={profile.twitter} className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-100">
-                                <FaTwitter className="h-5 w-5 text-blue-400" />
-                                <span>Twitter</span>
-                            </a>
-                        )}
-                        {profile.instagram && (
-                            <a href={profile.instagram} className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-100">
-                                <FaInstagram className="h-5 w-5 text-pink-600" />
-                                <span>Instagram</span>
-                            </a>
-                        )}
-                        {profile.tiktok && (
-                            <a href={profile.tiktok} className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-100">
-                                <FaTiktok className="h-5 w-5 text-black" />
-                                <span>TikTok</span>
-                            </a>
-                        )}
-                        {profile.whatsapp && (
-                            <a href={`https://wa.me/${profile.whatsapp}`} className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-100">
-                                <FaWhatsapp className="h-5 w-5 text-green-600" />
-                                <span>WhatsApp</span>
-                            </a>
                         )}
                     </div>
 
