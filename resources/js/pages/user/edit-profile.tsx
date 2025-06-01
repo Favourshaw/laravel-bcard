@@ -98,8 +98,10 @@ export default function Edit({ user }: EditProps) {
                     <form onSubmit={submit} className="space-y-6">
                         <div className="md:col-span-2">
                             <div className="flex items-center justify-between">
-                                <Uploads onChange={(file) => setData('logo', file)} />
-
+                                <div className="mb-4">
+                                    <Label className="text-muted mb-1.5 block text-sm font-medium">Logo</Label>
+                                    <Uploads onChange={(file) => setData('logo', file)} />
+                                </div>
                                 <div className="text-center">
                                     <img src={qrUrl} alt="QR Code" className="h-24 w-24" />
                                 </div>
@@ -119,7 +121,8 @@ export default function Edit({ user }: EditProps) {
                         </div>
 
                         <div className="md:col-span-2">
-                            <div className="flex items-center justify-between">
+                            <div className="mb-4">
+                                <Label className="text-muted mb-1.5 block text-sm font-medium">Avatar</Label>
                                 <Uploads onChange={(file) => setData('avatar', file)} />
                             </div>
 
