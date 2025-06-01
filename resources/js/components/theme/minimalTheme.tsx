@@ -1,7 +1,6 @@
 // resources/js/Components/Themes/MinimalTheme.tsx
 import { Button } from '@/components/ui/button';
 import HomeLayout from '@/layouts/home-layout';
-import { type BreadcrumbItem } from '@/types';
 import { PageProps } from '@inertiajs/core';
 import { Head, Link } from '@inertiajs/react';
 import { Link as LinkIcon, MapPin, Phone, Share2 } from 'lucide-react';
@@ -38,13 +37,6 @@ interface UsersPageProps extends PageProps {
     isOwner?: boolean;
 }
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Business Profiles',
-        href: '/profiles',
-    },
-];
-
 export default function MinimalTheme({ profileData, isOwner = false }: UsersPageProps) {
     if (!profileData?.user) return null;
 
@@ -77,7 +69,7 @@ export default function MinimalTheme({ profileData, isOwner = false }: UsersPage
     };
 
     return (
-        <HomeLayout breadcrumbs={breadcrumbs}>
+        <HomeLayout>
             <Head title={`${user.name} - Business Profile`} />
             <div className="flex flex-1 flex-col gap-6 p-6" style={{ color: text }}>
                 <div className="flex flex-col items-start gap-6 md:flex-row">

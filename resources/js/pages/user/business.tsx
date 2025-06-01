@@ -1,11 +1,11 @@
 import MinimalTheme from '@/components/theme/minimalTheme';
 import ModernTheme from '@/components/theme/modernTheme';
-import ClassicTheme from '@/components/theme/retroTheme';
+import RetroTheme from '@/components/theme/retroTheme';
 
 const themeComponents = {
     minimal: MinimalTheme,
     modern: ModernTheme,
-    classic: ClassicTheme,
+    retro: RetroTheme,
 };
 
 export default function Business({ profileData, isOwner }) {

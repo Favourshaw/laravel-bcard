@@ -1,10 +1,10 @@
-// resources/js/Components/Themes/MinimalTheme.tsx
-import { Button } from '@/components/ui/button';
-import HomeLayout from '@/layouts/home-layout';
-import { type BreadcrumbItem } from '@/types';
 import { PageProps } from '@inertiajs/core';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
 import { Head } from '@inertiajs/react';
-import { Link as LinkIcon, MapPin, Phone, Share2 } from 'lucide-react';
+import Hero from './retro/hero';
+import Nav from './retro/navbar';
 
 interface UsersPageProps extends PageProps {
     profileData: {
@@ -37,14 +37,7 @@ interface UsersPageProps extends PageProps {
     isOwner?: boolean;
 }
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Business Profiles',
-        href: '/profiles',
-    },
-];
-
-export default function retroTheme({ profileData, isOwner = false }: UsersPageProps) {
+export default function RetroTheme({ profileData, isOwner = false }: UsersPageProps) {
     if (!profileData?.user) return null;
 
     const { user, profile = {} } = profileData;
@@ -74,90 +67,52 @@ export default function retroTheme({ profileData, isOwner = false }: UsersPagePr
             alert('Profile link copied to clipboard!');
         }
     };
+    const { scrollYProgress } = useScroll();
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
     return (
-        <HomeLayout breadcrumbs={breadcrumbs}>
-            <Head title={`${user.name} - Business Profile`} />
-            <div className="flex flex-1 flex-col gap-6 p-6" style={{ color: text }}>
-                <div className="flex flex-col items-start gap-6 md:flex-row">
-                    <div className="flex w-full items-center justify-between gap-6">
-                        <div className="flex gap-3">
-                            <img
-                                src={logoUrl}
-                                alt={`${user.name}'s logo`}
-                                className="h-24 w-24 rounded-full border-4 object-cover shadow-lg"
-                                style={{ borderColor: primary }}
-                            />
-                            <img src={qrUrl} alt="QR Code" className="h-24 w-24 rounded-lg border" style={{ borderColor: secondary }} />
-                            <Button onClick={handleShare} className="gap-2" style={{ backgroundColor: primary, color: '#fff' }}>
-                                <Share2 className="h-4 w-4" />
-                                Share3
-                            </Button>
-                        </div>
-                    </div>
+        <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+            <Head title={`${user.name} - Home Page`} />
+            {/* Animated Background Grid */}
+            <motion.div className="fixed inset-0 opacity-20" style={{ y: backgroundY }}>
+                <div className="bg-grid-pattern absolute inset-0"></div>
+            </motion.div>
+
+            {/* Floating Cursor Effect */}
+            <motion.div
+                className="pointer-events-none fixed z-50 h-6 w-6 rounded-full bg-cyan-400 mix-blend-difference"
+                animate={{ x: mousePosition.x - 12, y: mousePosition.y - 12 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+            />
+
+            <Nav username={user.username} logoUrl={logoUrl} onShare={handleShare} />
+
+            <Hero name={user.name} bio={profile.bio} isOwner={isOwner} primaryColor={primary} textColor={text} />
+
+            <footer className="bg-opacity-50 mt-20 bg-black py-8">
+                <div className="container mx-auto px-4 text-center">
+                    <motion.p
+                        className="font-mono text-sm text-cyan-400"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        © 2025 Portfolio - Built with React & Framer Motion
+                    </motion.p>
                 </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                    <div className="rounded-lg p-6 shadow" style={{ backgroundColor: '#fff', borderLeft: `4px solid ${secondary}` }}>
-                        <h2 className="mb-4 text-xl font-semibold" style={{ color: primary }}>
-                            Contactw
-                        </h2>
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-2">
-                                <Phone className="h-5 w-5" style={{ color: secondary }} />
-                                <a href={`tel:${profile.phone}`} className="hover:underline" style={{ color: text }}>
-                                    {profile.phone}
-                                </a>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <MapPin className="h-5 w-5" style={{ color: secondary }} />
-                                <span>{profile.location || `No location added.`}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="rounded-lg p-6 shadow" style={{ backgroundColor: '#fff', borderLeft: `4px solid ${secondary}` }}>
-                        <h2 className="mb-4 text-xl font-semibold" style={{ color: primary }}>
-                            About
-                        </h2>
-                        <p className="whitespace-pre-line">{profile.bio || `No bio available.`}</p>
-                    </div>
-                </div>
-
-                <div className="rounded-lg p-6 shadow" style={{ backgroundColor: '#fff' }}>
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold" style={{ color: primary }}>
-                            Connect
-                        </h2>
-                        {isOwner && (
-                            <Button variant="ghost" size="sm">
-                                Edit Profile
-                            </Button>
-                        )}
-                    </div>
-
-                    {Object.keys(socialLinks).length > 0 && (
-                        <div className="mt-6 space-y-2">
-                            <h3 className="font-medium" style={{ color: primary }}>
-                                Other Links
-                            </h3>
-                            <div className="space-y-1">
-                                {Object.entries(socialLinks).map(([name, url]) => (
-                                    <a
-                                        key={name}
-                                        href={url}
-                                        className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-gray-100"
-                                        style={{ color: text }}
-                                    >
-                                        <LinkIcon className="h-4 w-4" style={{ color: secondary }} />
-                                        <span>{name}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </HomeLayout>
+            </footer>
+        </div>
     );
 }
