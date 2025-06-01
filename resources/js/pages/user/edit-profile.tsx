@@ -11,7 +11,7 @@ import { GlobeIcon, LoaderCircle, MailCheck, MapPin, PhoneCall } from 'lucide-re
 import { FormEventHandler } from 'react';
 import { FaBehance, FaDribbble, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaSnapchat, FaTiktok, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import makeAnimated from 'react-select/animated';
-import CreatableSelect, { ActionMeta, MultiValue } from 'react-select/creatable';
+import CreatableSelect, { MultiValue } from 'react-select/creatable';
 
 interface SelectOption {
     label: string;
@@ -102,7 +102,7 @@ export default function Edit({ user }: EditProps) {
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
 
-    const handleSkillsChange = (newValue: MultiValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => {
+    const handleSkillsChange = (newValue: MultiValue<SelectOption>) => {
         setData(
             'skills',
             newValue.map((item) => item.value),

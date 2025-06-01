@@ -47,9 +47,22 @@ interface UsersPageProps extends PageProps {
 }
 
 export default function RetroTheme({ profileData, isOwner = false }: UsersPageProps) {
-    if (!profileData?.user) return null;
-
     const { user, profile = {} } = profileData;
+
+    const { scrollYProgress } = useScroll();
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    if (!user) return null;
 
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
@@ -69,20 +82,6 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
             alert('Profile link copied to clipboard!');
         }
     };
-    const { scrollYProgress } = useScroll();
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
@@ -99,13 +98,9 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
             />
 
             <Nav username={user.username} logoUrl={logoUrl} onShare={handleShare} />
-
             <Hero name={user.name} bio={profile.bio} isOwner={isOwner} />
-
             <About bio={profile.bio} description={profile.description} avatar={avatarUrl} />
-
             <Skills skills={profile.skills} />
-
             <Contact bmail={profile.bmail} linkedin={profile.linkedin} github={profile.github} />
 
             <footer className="bg-opacity-50 mt-20 bg-black py-8">
