@@ -5,10 +5,9 @@ export interface NavProps {
     name: string;
     bio?: string;
     isOwner: boolean;
-    onShare: () => void;
 }
 
-const Hero: React.FC<NavProps> = ({ name, bio, isOwner, onShare }) => {
+const Hero: React.FC<NavProps> = ({ name, bio, isOwner }) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,

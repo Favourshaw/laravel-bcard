@@ -50,18 +50,10 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
     if (!profileData?.user) return null;
 
     const { user, profile = {} } = profileData;
-    const socialLinks = profile.social_links || {};
-
-    const { primary, secondary, text } = user.colors || {
-        primary: '#1f2937', // Default dark gray
-        secondary: '#3b82f6', // Default blue
-        text: '#111827', // Default text
-    };
 
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
-    const qrUrl = getStorageUrl(profile.qr, '/qrcodes/5.png');
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const profileUrl = `${window.location.origin}/profiles/${user.username || user.id}`;
 
@@ -108,9 +100,9 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
 
             <Nav username={user.username} logoUrl={logoUrl} onShare={handleShare} />
 
-            <Hero name={user.name} bio={profile.bio} isOwner={isOwner} primaryColor={primary} textColor={text} />
+            <Hero name={user.name} bio={profile.bio} isOwner={isOwner} />
 
-            <About bio={profile.bio} description={profile.description} avatar={avatarUrl} primaryColor={primary} textColor={text} />
+            <About bio={profile.bio} description={profile.description} avatar={avatarUrl} />
 
             <Skills skills={profile.skills} />
 

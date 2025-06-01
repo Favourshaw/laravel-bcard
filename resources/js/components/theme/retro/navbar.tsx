@@ -7,7 +7,7 @@ export interface NavProps {
     onShare: () => void;
 }
 
-const Nav: React.FC<NavProps> = ({ username, logoUrl, onShare }) => {
+const Nav: React.FC<NavProps> = ({ username, logoUrl }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navItems = ['Home', 'About', 'Projects', 'Skills', 'Contact'];

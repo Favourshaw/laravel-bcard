@@ -11,7 +11,12 @@ import { GlobeIcon, LoaderCircle, MailCheck, MapPin, PhoneCall } from 'lucide-re
 import { FormEventHandler } from 'react';
 import { FaBehance, FaDribbble, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaSnapchat, FaTiktok, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import makeAnimated from 'react-select/animated';
-import CreatableSelect from 'react-select/creatable';
+import CreatableSelect, { ActionMeta, MultiValue } from 'react-select/creatable';
+
+interface SelectOption {
+    label: string;
+    value: string;
+}
 
 const animatedComponents = makeAnimated();
 
@@ -97,10 +102,10 @@ export default function Edit({ user }: EditProps) {
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
 
-    const handleSkillsChange = (newValue: any) => {
+    const handleSkillsChange = (newValue: MultiValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => {
         setData(
             'skills',
-            newValue.map((item: any) => item.value),
+            newValue.map((item) => item.value),
         );
     };
 
@@ -110,7 +115,6 @@ export default function Edit({ user }: EditProps) {
             <div className="flex h-full max-w-5xl flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="relative min-h-[100vh] flex-1 rounded-xl border bg-white p-6 dark:bg-neutral-900">
                     <form onSubmit={submit} className="space-y-6">
-                        {/* Logo & Avatar Uploads */}
                         <div className="md:col-span-2">
                             <div className="flex items-center justify-between">
                                 <div className="mb-4">
@@ -206,7 +210,7 @@ export default function Edit({ user }: EditProps) {
                         {/* Skills Input */}
                         <div className="md:col-span-2">
                             <Label className="text-muted mb-1.5 block text-sm font-medium">Skills</Label>
-                            <CreatableSelect
+                            <CreatableSelect<SelectOption, true>
                                 isMulti
                                 components={animatedComponents}
                                 onChange={handleSkillsChange}

@@ -9,68 +9,6 @@ const Skills: React.FC<NavProps> = ({ skills }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
 
-    const skillCategories = [
-        {
-            title: 'FRONTEND.js',
-            skills: [
-                { name: 'React', level: 95 },
-                { name: 'TypeScript', level: 90 },
-                { name: 'Next.js', level: 85 },
-                { name: 'Tailwind CSS', level: 92 },
-            ],
-            color: 'cyan',
-        },
-        {
-            title: 'BACKEND.py',
-            skills: [
-                { name: 'Node.js', level: 88 },
-                { name: 'Python', level: 85 },
-                { name: 'PostgreSQL', level: 82 },
-                { name: 'MongoDB', level: 80 },
-            ],
-            color: 'pink',
-        },
-        {
-            title: 'TOOLS.exe',
-            skills: [
-                { name: 'Git', level: 95 },
-                { name: 'Docker', level: 78 },
-                { name: 'AWS', level: 75 },
-                { name: 'Figma', level: 85 },
-            ],
-            color: 'purple',
-        },
-    ];
-
-    const getColorClasses = (color: string) => {
-        switch (color) {
-            case 'cyan':
-                return {
-                    border: 'border-cyan-400',
-                    text: 'text-cyan-400',
-                    bg: 'bg-cyan-400',
-                };
-            case 'pink':
-                return {
-                    border: 'border-pink-500',
-                    text: 'text-pink-500',
-                    bg: 'bg-pink-500',
-                };
-            case 'purple':
-                return {
-                    border: 'border-purple-500',
-                    text: 'text-purple-500',
-                    bg: 'bg-purple-500',
-                };
-            default:
-                return {
-                    border: 'border-cyan-400',
-                    text: 'text-cyan-400',
-                    bg: 'bg-cyan-400',
-                };
-        }
-    };
-
     return (
         <section id="skills" className="relative px-4 py-20">
             <div className="container mx-auto max-w-6xl" ref={ref}>
