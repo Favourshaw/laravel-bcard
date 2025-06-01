@@ -54,6 +54,7 @@ export interface User {
 export interface ProfileFormData {
     _method: string;
     logo: File | null;
+    avatar: File | null;
     phone: string;
     bio: string;
     location: string;

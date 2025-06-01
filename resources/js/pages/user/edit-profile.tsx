@@ -23,7 +23,9 @@ interface EditProps extends PageProps {
         profile?: {
             id: number;
             logo?: File | null;
+            avatar?: File | null;
             phone?: string;
+            description?: string;
             bio?: string;
             location?: string;
             facebook?: string;
@@ -57,7 +59,9 @@ export default function Edit({ user }: EditProps) {
     const { data, setData, post, processing, errors } = useForm<ProfileFormData>({
         _method: 'PUT',
         logo: null,
+        avatar: null,
         phone: user?.profile?.phone || '',
+        description: user?.profile?.description || '',
         bio: user?.profile?.bio || '',
         location: user?.profile?.location || '',
         facebook: user?.profile?.facebook || '',
@@ -83,6 +87,8 @@ export default function Edit({ user }: EditProps) {
         });
     };
     const qrUrl = getStorageUrl(profile?.qr, '/qrcodes/5.png');
+    const avatarUrl = getStorageUrl(profile?.avatar, '/storage/avatars/avatar.png');
+    const logoUrl = getStorageUrl(profile?.logo, '/storage/logos/logos.png');
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -107,8 +113,29 @@ export default function Edit({ user }: EditProps) {
                                 />
                             )}
 
+                            <img src={logoUrl} alt="Logo preview" className="h-32 w-auto rounded-md border object-contain p-2" />
+
                             <InputError message={errors.logo} className="mt-1" />
                         </div>
+
+                        <div className="md:col-span-2">
+                            <div className="flex items-center justify-between">
+                                <Uploads onChange={(file) => setData('avatar', file)} />
+                            </div>
+
+                            {data.avatar && (
+                                <img
+                                    src={typeof data.avatar === 'string' ? `/storage/${data.avatar}` : URL.createObjectURL(data.avatar)}
+                                    alt="Avatar preview"
+                                    className="h-32 w-auto rounded-md border object-contain p-2"
+                                />
+                            )}
+
+                            <img src={avatarUrl} alt="Avatar" className="h-32 w-32 rounded-md border object-contain p-2" />
+
+                            <InputError message={errors.avatar} className="mt-1" />
+                        </div>
+
                         <div className="w-full space-y-6 lg:max-w-[550px]">
                             <div className="">
                                 <Label className="text-muted mb-1.5 block text-sm font-medium">Business Name</Label>
@@ -146,6 +173,19 @@ export default function Edit({ user }: EditProps) {
                                 rows={4}
                             />
                             <InputError message={errors.bio} className="mt-1" />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <Label className="text-muted mb-1.5 block text-sm font-medium">Description</Label>
+                            <textarea
+                                name="description"
+                                value={data.description}
+                                onChange={(e) => setData('description', e.target.value)}
+                                disabled={processing}
+                                className="w-full rounded border p-3 text-base text-black shadow-md"
+                                rows={4}
+                            />
+                            <InputError message={errors.description} className="mt-1" />
                         </div>
                         <div className="grid gap-6 lg:grid-cols-2">
                             {[

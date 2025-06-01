@@ -33,7 +33,7 @@ export default function Uploads({
         <span
           className="cursor-pointer text-blue-600"
           onClick={() => fileInputRef.current?.click()}
-        > <label className="block mb-3 text-base font-medium text-black">Upload your logo</label> 
+        > <label className="block mb-3 text-base font-medium text-black">Upload your File</label> 
             <p>
             <span className="text-gray-500 text-sm">Drop your file here or </span>
             </p>

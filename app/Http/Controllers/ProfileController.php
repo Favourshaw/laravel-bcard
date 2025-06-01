@@ -25,6 +25,8 @@ class ProfileController extends Controller
                 'created_at' => $user->created_at->toDateTimeString(),
                 'profile' => $profile ? [
                     'bio' => $profile->bio,
+                    'avatar' => $profile->avatar,
+                    'description' => $profile->description,
                     'phone' => $profile->phone,
                     'facebook' => $profile->facebook,
                     'tweeter' => $profile->tweeter,
@@ -67,6 +69,8 @@ class ProfileController extends Controller
                 ],
                 'profile' => $user->profile ? $user->profile->only([
                     'logo',
+                    'avatar',
+                    'description',
                     'phone',
                     'bio',
                     'location',
@@ -112,7 +116,9 @@ class ProfileController extends Controller
 
         $validated = $request->validate([
             'logo' => 'nullable|image|max:2048',
+            'avatar' => 'nullable|image|max:2048', // New avatar field
             'phone' => 'nullable|string|max:20',
+            'description' => 'nullable|string|max:2048',
             'slogan' => 'nullable|string|max:30',
             'bio' => 'nullable|string|max:1000',
             'location' => 'nullable|string|max:255',
@@ -133,17 +139,27 @@ class ProfileController extends Controller
 
         $profile = $user->profile ?? new Profile(['user_id' => $user->id]);
 
+        // Handle logo upload
         if ($request->hasFile('logo')) {
             if ($profile->logo) {
                 Storage::disk('public')->delete($profile->logo);
             }
-
             $logoPath = $request->file('logo')->store('logos', 'public');
             $profile->logo = $logoPath;
         }
 
-        // Basic Fields
+        // Handle avatar upload
+        if ($request->hasFile('avatar')) {
+            if ($profile->avatar) {
+                Storage::disk('public')->delete($profile->avatar);
+            }
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+            $profile->avatar = $avatarPath;
+        }
+
+        // Apply remaining validated fields (skip files)
         foreach ($validated as $key => $value) {
+            if (in_array($key, ['logo', 'avatar'])) continue;
             $profile->{$key} = $value ?? $profile->{$key};
         }
 
@@ -154,6 +170,7 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
+
 
     public function destroy(Profile $profile)
     {
