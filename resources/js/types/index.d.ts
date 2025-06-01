@@ -63,5 +63,8 @@ export interface ProfileFormData {
     instagram: string;
     tiktok: string;
     whatsapp: string;
+    qr: File | null;
+    skills: Record<string, string>;
+
     [key: string]: string | File | null;
 }

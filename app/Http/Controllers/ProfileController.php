@@ -73,6 +73,7 @@ class ProfileController extends Controller
                     'description',
                     'phone',
                     'bio',
+                    "skills",
                     'location',
                     'facebook',
                     'tweeter',
@@ -135,6 +136,8 @@ class ProfileController extends Controller
             'bmail' => 'nullable|email|max:255',
             'behance' => 'nullable|url',
             'dribble' => 'nullable|url',
+            'skills' => 'nullable|array',
+            'skills.*' => 'string|max:100',
         ]);
 
         $profile = $user->profile ?? new Profile(['user_id' => $user->id]);

@@ -6,10 +6,14 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type ProfileFormData } from '@/types';
 import { PageProps } from '@inertiajs/core';
 import { Head, useForm } from '@inertiajs/react';
-import { Label } from '@radix-ui/react-dropdown-menu';
+import { Label } from '@radix-ui/react-label';
 import { GlobeIcon, LoaderCircle, MailCheck, MapPin, PhoneCall } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { FaBehance, FaDribbble, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaSnapchat, FaTiktok, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import makeAnimated from 'react-select/animated';
+import CreatableSelect from 'react-select/creatable';
+
+const animatedComponents = makeAnimated();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -43,6 +47,7 @@ interface EditProps extends PageProps {
             dribble?: string;
             slogan?: string;
             qr?: string;
+            skills?: string[];
         };
     };
 }
@@ -78,6 +83,7 @@ export default function Edit({ user }: EditProps) {
         behance: user?.profile?.behance || '',
         dribble: user?.profile?.dribble || '',
         slogan: user?.profile?.slogan || '',
+        skills: user?.profile?.skills || [],
     });
 
     const submit: FormEventHandler = (e) => {
@@ -86,9 +92,17 @@ export default function Edit({ user }: EditProps) {
             forceFormData: true,
         });
     };
-    const qrUrl = getStorageUrl(profile?.qr, '/qrcodes/5.png');
-    const avatarUrl = getStorageUrl(profile?.avatar, '/storage/avatars/avatar.png');
-    const logoUrl = getStorageUrl(profile?.logo, '/storage/logos/logos.png');
+
+    const qrUrl = getStorageUrl(profile.qr, '/qrcodes/5.png');
+    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
+    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
+
+    const handleSkillsChange = (newValue: any) => {
+        setData(
+            'skills',
+            newValue.map((item: any) => item.value),
+        );
+    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -96,6 +110,7 @@ export default function Edit({ user }: EditProps) {
             <div className="flex h-full max-w-5xl flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="relative min-h-[100vh] flex-1 rounded-xl border bg-white p-6 dark:bg-neutral-900">
                     <form onSubmit={submit} className="space-y-6">
+                        {/* Logo & Avatar Uploads */}
                         <div className="md:col-span-2">
                             <div className="flex items-center justify-between">
                                 <div className="mb-4">
@@ -116,16 +131,15 @@ export default function Edit({ user }: EditProps) {
                             )}
 
                             <img src={logoUrl} alt="Logo preview" className="h-32 w-auto rounded-md border object-contain p-2" />
-
                             <InputError message={errors.logo} className="mt-1" />
                         </div>
 
+                        {/* Avatar Upload */}
                         <div className="md:col-span-2">
                             <div className="mb-4">
                                 <Label className="text-muted mb-1.5 block text-sm font-medium">Avatar</Label>
                                 <Uploads onChange={(file) => setData('avatar', file)} />
                             </div>
-
                             {data.avatar && (
                                 <img
                                     src={typeof data.avatar === 'string' ? `/storage/${data.avatar}` : URL.createObjectURL(data.avatar)}
@@ -133,14 +147,13 @@ export default function Edit({ user }: EditProps) {
                                     className="h-32 w-auto rounded-md border object-contain p-2"
                                 />
                             )}
-
                             <img src={avatarUrl} alt="Avatar" className="h-32 w-32 rounded-md border object-contain p-2" />
-
                             <InputError message={errors.avatar} className="mt-1" />
                         </div>
 
+                        {/* Business Info */}
                         <div className="w-full space-y-6 lg:max-w-[550px]">
-                            <div className="">
+                            <div>
                                 <Label className="text-muted mb-1.5 block text-sm font-medium">Business Name</Label>
                                 <Input
                                     name="bname"
@@ -151,8 +164,7 @@ export default function Edit({ user }: EditProps) {
                                 />
                                 <InputError message={errors.bname} className="mt-1" />
                             </div>
-
-                            <div className="">
+                            <div>
                                 <Label className="text-muted mb-1.5 block text-sm font-medium">Slogan</Label>
                                 <Input
                                     name="slogan"
@@ -165,6 +177,7 @@ export default function Edit({ user }: EditProps) {
                             </div>
                         </div>
 
+                        {/* Bio & Description */}
                         <div className="md:col-span-2">
                             <Label className="text-muted mb-1.5 block text-sm font-medium">Bio</Label>
                             <textarea
@@ -177,7 +190,6 @@ export default function Edit({ user }: EditProps) {
                             />
                             <InputError message={errors.bio} className="mt-1" />
                         </div>
-
                         <div className="md:col-span-2">
                             <Label className="text-muted mb-1.5 block text-sm font-medium">Description</Label>
                             <textarea
@@ -190,12 +202,30 @@ export default function Edit({ user }: EditProps) {
                             />
                             <InputError message={errors.description} className="mt-1" />
                         </div>
+
+                        {/* Skills Input */}
+                        <div className="md:col-span-2">
+                            <Label className="text-muted mb-1.5 block text-sm font-medium">Skills</Label>
+                            <CreatableSelect
+                                isMulti
+                                components={animatedComponents}
+                                onChange={handleSkillsChange}
+                                value={(data.skills || []).map((skill) => ({ label: skill, value: skill }))}
+                                className="react-select-container"
+                                classNamePrefix="react-select"
+                                placeholder="Type and press enter..."
+                                isDisabled={processing}
+                            />
+                            <InputError message={errors.skills as string} className="mt-1" />
+                        </div>
+
+                        {/* Social Media */}
                         <div className="grid gap-6 lg:grid-cols-2">
                             {[
                                 { name: 'phone', label: 'Phone', icon: <PhoneCall size={22} /> },
                                 { name: 'location', label: 'Location', icon: <MapPin size={22} /> },
                                 { name: 'facebook', label: 'Facebook', icon: <FaFacebook size={22} /> },
-                                { name: 'tweetter', label: 'Twitter', icon: <FaTwitter size={22} /> },
+                                { name: 'twitter', label: 'Twitter', icon: <FaTwitter size={22} /> },
                                 { name: 'instagram', label: 'Instagram', icon: <FaInstagram size={22} /> },
                                 { name: 'tiktok', label: 'TikTok', icon: <FaTiktok size={22} /> },
                                 { name: 'whatsapp', label: 'WhatsApp', icon: <FaWhatsapp size={22} /> },
@@ -216,13 +246,13 @@ export default function Edit({ user }: EditProps) {
                                         onChange={(e) => setData(name as keyof typeof data, e.target.value)}
                                         disabled={processing}
                                         className="w-full rounded border p-3 pl-10 text-base text-black shadow-md"
-                                        placeholder={profile?.[name as keyof typeof profile] || ''}
                                     />
-
                                     <InputError message={errors[name as keyof typeof errors]} className="mt-1" />
                                 </div>
                             ))}
                         </div>
+
+                        {/* Actions */}
                         <div className="mt-18 flex flex-col items-center justify-center gap-3 md:flex-row">
                             <Button
                                 variant="secondary"

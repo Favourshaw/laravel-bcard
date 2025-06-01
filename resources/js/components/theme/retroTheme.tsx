@@ -6,6 +6,7 @@ import { Head } from '@inertiajs/react';
 import About from './retro/about';
 import Hero from './retro/hero';
 import Nav from './retro/navbar';
+import Skills from './retro/skills';
 
 interface UsersPageProps extends PageProps {
     profileData: {
@@ -34,6 +35,7 @@ interface UsersPageProps extends PageProps {
             tiktok?: string;
             whatsapp?: string;
             qr?: string;
+            skills?: string[];
             social_links?: Record<string, string>;
         };
     };
@@ -105,6 +107,7 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
             <Hero name={user.name} bio={profile.bio} isOwner={isOwner} primaryColor={primary} textColor={text} />
 
             <About bio={profile.bio} description={profile.description} avatar={avatarUrl} primaryColor={primary} textColor={text} />
+            <Skills skills={profile.skills} />
 
             <footer className="bg-opacity-50 mt-20 bg-black py-8">
                 <div className="container mx-auto px-4 text-center">

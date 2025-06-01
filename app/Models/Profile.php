@@ -30,6 +30,7 @@ class Profile extends Model
         'snapchat',
         'github',
         'others',
+        'skills',
         'bname',
         'bmail',
         'behance',
@@ -38,7 +39,7 @@ class Profile extends Model
 
 
     protected $casts = [
-        'social_links' => 'array',
+        'skills' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
