@@ -1,7 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const About = () => {
+export interface NavProps {
+    description?: string;
+    bio?: string;
+    avatar?: string;
+}
+
+const About: React.FC<NavProps> = ({ description, bio, avatar }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
 
@@ -30,17 +36,16 @@ const About = () => {
                         <div className="bg-opacity-30 border-opacity-30 rounded-lg border border-cyan-400 bg-black p-6 backdrop-blur-sm">
                             <h3 className="mb-4 font-mono text-2xl font-bold text-cyan-400">&gt; console.log("Hello World!");</h3>
                             <p className="font-mono text-sm leading-relaxed text-gray-300">
-                                I'm a passionate full-stack developer with 5+ years of experience creating digital solutions that blend cutting-edge
-                                technology with stunning visual design. My journey started in the retro computing era, which still influences my
-                                aesthetic choices today.
+                                {bio ||
+                                    "I'm a passionate developer with a love for creating innovative solutions. My journey in tech has been fueled by curiosity and a desire to push boundaries."}
                             </p>
                         </div>
 
                         <div className="bg-opacity-30 border-opacity-30 rounded-lg border border-pink-500 bg-black p-6 backdrop-blur-sm">
                             <h4 className="mb-3 font-mono text-xl font-bold text-pink-400">&gt; My Philosophy</h4>
                             <p className="font-mono text-sm leading-relaxed text-gray-300">
-                                Code is poetry, design is art, and user experience is everything. I believe in creating applications that not only
-                                function flawlessly but also evoke emotion and wonder.
+                                {description ||
+                                    'I believe in the power of technology to transform lives. My approach is to blend creativity with technical expertise, ensuring that every project I undertake is not only functional but also delightful to use.'}
                             </p>
                         </div>
                     </motion.div>
@@ -55,14 +60,8 @@ const About = () => {
                             <div className="mx-auto h-80 w-80 rounded-lg bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 p-1">
                                 <div className="flex h-full w-full items-center justify-center rounded-lg bg-black">
                                     <div className="text-center">
-                                        <motion.div
-                                            className="font-mono text-6xl font-bold text-cyan-400"
-                                            animate={{ textShadow: ['0 0 10px #00ffff', '0 0 30px #00ffff', '0 0 10px #00ffff'] }}
-                                            transition={{ repeat: Infinity, duration: 2 }}
-                                        >
-                                            {'<>'}
-                                        </motion.div>
-                                        <p className="mt-4 font-mono text-pink-400">DEVELOPER.EXE</p>
+                                        <img src={avatar} alt="Avatar" className="h-64 w-64 rounded-full border-4 border-cyan-400 shadow-lg" />
+                                        <p className="mt-4 font-mono text-lg text-cyan-400">Your Friendly Developer</p>
                                     </div>
                                 </div>
                             </div>

@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { Head } from '@inertiajs/react';
+import About from './retro/about';
 import Hero from './retro/hero';
 import Nav from './retro/navbar';
 
@@ -22,6 +23,8 @@ interface UsersPageProps extends PageProps {
         };
         profile: {
             logo?: string;
+            avatar?: string;
+            description?: string;
             phone?: string;
             bio?: string;
             location?: string;
@@ -51,8 +54,9 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
 
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
-    const logoUrl = getStorageUrl(profile.logo, '/defaults/default.png');
+    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
     const qrUrl = getStorageUrl(profile.qr, '/qrcodes/5.png');
+    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const profileUrl = `${window.location.origin}/profiles/${user.username || user.id}`;
 
     const handleShare = async () => {
@@ -85,12 +89,11 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
     return (
         <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
             <Head title={`${user.name} - Home Page`} />
-            {/* Animated Background Grid */}
+
             <motion.div className="fixed inset-0 opacity-20" style={{ y: backgroundY }}>
                 <div className="bg-grid-pattern absolute inset-0"></div>
             </motion.div>
 
-            {/* Floating Cursor Effect */}
             <motion.div
                 className="pointer-events-none fixed z-50 h-6 w-6 rounded-full bg-cyan-400 mix-blend-difference"
                 animate={{ x: mousePosition.x - 12, y: mousePosition.y - 12 }}
@@ -100,6 +103,8 @@ export default function RetroTheme({ profileData, isOwner = false }: UsersPagePr
             <Nav username={user.username} logoUrl={logoUrl} onShare={handleShare} />
 
             <Hero name={user.name} bio={profile.bio} isOwner={isOwner} primaryColor={primary} textColor={text} />
+
+            <About bio={profile.bio} description={profile.description} avatar={avatarUrl} primaryColor={primary} textColor={text} />
 
             <footer className="bg-opacity-50 mt-20 bg-black py-8">
                 <div className="container mx-auto px-4 text-center">
