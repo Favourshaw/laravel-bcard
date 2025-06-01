@@ -73,7 +73,7 @@ const Skills: React.FC<NavProps> = ({ skills }) => {
 
     return (
         <section id="skills" className="relative px-4 py-20">
-            <div className="container mx-auto" ref={ref}>
+            <div className="container mx-auto max-w-6xl" ref={ref}>
                 <motion.div
                     className="mb-16 text-center"
                     initial={{ opacity: 0, y: 50 }}

@@ -19,7 +19,7 @@ const Nav: React.FC<NavProps> = ({ username, logoUrl, onShare }) => {
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-            <div className="container mx-auto flex items-center justify-between px-4 py-4">
+            <div className="container mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
                 <motion.div className="font-mono text-2xl font-bold text-cyan-400" whileHover={{ scale: 1.1, textShadow: '0 0 20px #00ffff' }}>
                     <img src={logoUrl} alt={`${username}'s Logo`} className="mr-2 inline-block h-8 w-8" />
                 </motion.div>
