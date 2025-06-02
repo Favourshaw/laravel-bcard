@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 import Footer from './fitness/footer';
 import DynamicMap from './map/map';
 
-export default function Fitness({ profileData, isOwner = false }: UsersPgProps) {
+export default function Fitness({ profileData }: UsersPgProps) {
     const { user, profile = {} } = profileData;
     const [menuOpen, setMenuOpen] = useState(false);
     const aboutRef = useRef(null);
