@@ -13,7 +13,7 @@ export default function DynamicMap({ location }: MapEmbedProps) {
     const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(locationToUse)}&z=15&output=embed`;
 
     return (
-        <div className="mx-auto h-[400px] w-full max-w-6xl overflow-hidden rounded-lg shadow-lg">
+        <div className="mx-auto my-5 h-[400px] w-full max-w-6xl overflow-hidden rounded-lg shadow-lg">
             {!hasError ? (
                 <motion.iframe
                     key="map"

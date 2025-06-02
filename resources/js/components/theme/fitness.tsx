@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { PageProps } from '@inertiajs/core';
+import { UsersPgProps } from '@/types/userPgProps';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
@@ -7,45 +7,7 @@ import { useRef, useState } from 'react';
 import Footer from './fitness/footer';
 import DynamicMap from './map/map';
 
-interface UsersPageProps extends PageProps {
-    profileData: {
-        user: {
-            id: string;
-            name: string;
-            username?: string;
-            theme?: string;
-            colors?: {
-                primary: string;
-                secondary: string;
-                text: string;
-            };
-            created_at: string;
-        };
-        profile: {
-            logo?: string;
-            avatar?: string;
-            description?: string;
-            phone?: string;
-            slogan?: string;
-            bio?: string;
-            location?: string;
-            facebook?: string;
-            twitter?: string;
-            instagram?: string;
-            tiktok?: string;
-            whatsapp?: string;
-            qr?: string;
-            linkedin?: string;
-            github?: string;
-            bmail?: string;
-            skills?: string[];
-            social_links?: Record<string, string>;
-        };
-    };
-    isOwner?: boolean;
-}
-
-export default function Fitness({ profileData, isOwner = false }: UsersPageProps) {
+export default function Fitness({ profileData, isOwner = false }: UsersPgProps) {
     const { user, profile = {} } = profileData;
     const [menuOpen, setMenuOpen] = useState(false);
     const aboutRef = useRef(null);
@@ -64,21 +26,6 @@ export default function Fitness({ profileData, isOwner = false }: UsersPageProps
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
-    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
-    const profileUrl = `${window.location.origin}/profiles/${user.username || user.id}`;
-
-    const handleShare = async () => {
-        try {
-            await navigator.share({
-                title: `${user.name}'s Business Profile`,
-                text: `Check out ${user.name}'s business profile`,
-                url: profileUrl,
-            });
-        } catch {
-            navigator.clipboard.writeText(profileUrl);
-            alert('Profile link copied to clipboard!');
-        }
-    };
 
     return (
         <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-[#0d0f1a] to-[#1b1f2f] text-white">
@@ -257,12 +204,10 @@ export default function Fitness({ profileData, isOwner = false }: UsersPageProps
             </div>
             <div ref={aboutRef} className="mx-auto max-w-7xl px-6 py-16 md:py-24">
                 <div className="flex flex-col items-center gap-8 lg:flex-row">
-                    {/* Left Images */}
                     <div className="flex w-full flex-col gap-4 sm:flex-row lg:w-1/2 lg:flex-col">
                         <img src="/storage/theme/trainer-about1.jpg" alt="Trainer" className="w-full rounded-xl" />
                     </div>
 
-                    {/* Right Content */}
                     <div className="w-full space-y-6 lg:w-1/2">
                         <p className="flex items-center gap-2 font-semibold" style={{ color: primaryColor }}>
                             <span className="text-xl">🏋️</span> About Us
@@ -307,7 +252,15 @@ export default function Fitness({ profileData, isOwner = false }: UsersPageProps
                 </div>
             </div>{' '}
             <DynamicMap location={profile.location} />
-            <Footer bmail={profile.bmail} phone={profile.phone} />
+            <Footer
+                bmail={profile.bmail}
+                bname={profile.bname}
+                logo={logoUrl}
+                phone={profile.phone}
+                location={profile.location}
+                slogan={profile.slogan}
+                primaryColor={primaryColor}
+            />
         </div>
     );
 }
