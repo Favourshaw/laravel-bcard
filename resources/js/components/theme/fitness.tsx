@@ -4,6 +4,8 @@ import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
+import Footer from './fitness/footer';
+import DynamicMap from './map/map';
 
 interface UsersPageProps extends PageProps {
     profileData: {
@@ -303,7 +305,9 @@ export default function Fitness({ profileData, isOwner = false }: UsersPageProps
                         </Button>
                     </div>
                 </div>
-            </div>
+            </div>{' '}
+            <DynamicMap location={profile.location} />
+            <Footer bmail={profile.bmail} phone={profile.phone} />
         </div>
     );
 }
