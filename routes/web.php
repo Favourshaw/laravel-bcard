@@ -61,6 +61,8 @@ require __DIR__ . '/auth.php';
 //alway put wildcard routes at the bottom
 Route::get('{user:username}', [ControllersProfileController::class, 'info'])
     ->name('profiles.info');
+Route::get('{user:username}/links', [ControllersProfileController::class, 'info'])
+    ->name('profiles.info');
 Route::fallback(function () {
     return Inertia::render('notFound');
 });

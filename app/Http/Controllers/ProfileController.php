@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
 
 class ProfileController extends Controller
 {
@@ -53,11 +54,15 @@ class ProfileController extends Controller
         return Inertia::render('user/profile', $data);
     }
 
+
+
     public function info(User $user)
     {
         $user->load('profile');
 
-        return Inertia::render('user/business', [
+        $view = Route::currentRouteName() === 'user.links' ? 'user/links' : 'user/business';
+
+        return Inertia::render($view, [
             'profileData' => [
                 'user' => [
                     'id' => $user->id,
@@ -73,7 +78,7 @@ class ProfileController extends Controller
                     'description',
                     'phone',
                     'bio',
-                    "skills",
+                    'skills',
                     'location',
                     'facebook',
                     'tweeter',
@@ -92,11 +97,12 @@ class ProfileController extends Controller
                     'dribble',
                     'slogan',
                     'social_links'
-                ]) : null
+                ]) : null,
             ],
             'canEdit' => auth()->check() && auth()->id() === $user->id
         ]);
     }
+
 
 
     public function edits()
