@@ -6,7 +6,6 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import FitnessClasses from './fitness/classes';
 import Footer from './fitness/footer';
-import DynamicMap from './map/map';
 
 export default function Fitness({ profileData }: UsersPgProps) {
     const { user, profile = {} } = profileData;
@@ -33,45 +32,45 @@ export default function Fitness({ profileData }: UsersPgProps) {
             <div className="relative">
                 <div className='absolute inset-0 z-0 bg-[url("storage/theme/fitness-hero.jpg")] bg-cover bg-center bg-no-repeat opacity-30' />
                 <Head title={`${user.name} - Home Page`} />
-                <nav className="relative flex w-full items-center justify-between border-b border-white/10 p-4 md:px-10 md:py-6">
-                    <div className="flex items-center gap-2 text-xl font-bold" style={{ color: primaryColor }}>
-                        <img src={logoUrl} alt="Logo" className="h-8 w-8" />
-                    </div>
-                    <div className="hidden items-center gap-8 text-sm font-medium md:flex">
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Home
-                        </a>
-                        <button onClick={scrollToAbout} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            About Us
-                        </button>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Services
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Blog
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Pages
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Contact Us
-                        </a>
-                        <Button
-                            className="rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
-                            style={{ backgroundColor: primaryColor }}
+                <nav className="relative border-b border-white/10 p-4 md:px-0 md:py-6">
+                    <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
+                        <div className="flex items-center gap-2 text-xl font-bold" style={{ color: primaryColor }}>
+                            <img src={logoUrl} alt="Logo" className="h-8 w-8" />
+                        </div>
+                        <div className="hidden items-center gap-8 text-sm font-medium md:flex">
+                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                                Home
+                            </a>
+                            <button onClick={scrollToAbout} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                                About Us
+                            </button>
+                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                                Classes
+                            </a>
+                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                                Map
+                            </a>
+
+                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                                Contact Us
+                            </a>
+                            <Button
+                                className="rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
+                                style={{ backgroundColor: primaryColor }}
+                            >
+                                Get Started
+                            </Button>
+                        </div>
+                        <button
+                            onClick={() => setMenuOpen(!menuOpen)}
+                            style={{ color: primaryColor }}
+                            className="transition-opacity hover:opacity-80 md:hidden"
                         >
-                            Get Started
-                        </Button>
+                            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+                        </button>
                     </div>
-                    <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        style={{ color: primaryColor }}
-                        className="transition-opacity hover:opacity-80 md:hidden"
-                    >
-                        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-                    </button>
                 </nav>
-                {/* Mobile Menu */}
+
                 {menuOpen && (
                     <div className="relative flex flex-col gap-4 border-t border-white/10 bg-[#1b1f2f] px-6 py-4 text-sm md:hidden">
                         <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
@@ -252,7 +251,6 @@ export default function Fitness({ profileData }: UsersPgProps) {
                     </div>
                 </div>
             </div>{' '}
-            <DynamicMap location={profile.location} />
             <FitnessClasses primaryColor={primaryColor} />
             <Footer
                 bmail={profile.bmail}
