@@ -4,6 +4,7 @@ import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
+import FitnessClasses from './fitness/classes';
 import Footer from './fitness/footer';
 import DynamicMap from './map/map';
 
@@ -252,6 +253,7 @@ export default function Fitness({ profileData }: UsersPgProps) {
                 </div>
             </div>{' '}
             <DynamicMap location={profile.location} />
+            <FitnessClasses primaryColor={primaryColor} />
             <Footer
                 bmail={profile.bmail}
                 bname={profile.bname}
