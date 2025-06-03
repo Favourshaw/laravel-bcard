@@ -1,6 +1,7 @@
 import Fitness from '@/components/theme/fitness';
 import MinimalTheme from '@/components/theme/minimalTheme';
 import ModernTheme from '@/components/theme/modernTheme';
+import Personal1 from '@/components/theme/personal-tab';
 import RetroTheme from '@/components/theme/retroTheme';
 
 const themeComponents = {
@@ -8,6 +9,7 @@ const themeComponents = {
     modern: ModernTheme,
     retro: RetroTheme,
     fitness: Fitness,
+    personal1: Personal1,
 };
 
 export default function Business({ profileData, isOwner }) {
