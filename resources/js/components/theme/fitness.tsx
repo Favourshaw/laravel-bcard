@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { UsersPgProps } from '@/types/userPgProps';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { FaWhatsapp } from 'react-icons/fa';
 import FitnessClasses from './fitness/classes';
 import Footer from './fitness/footer';
 
@@ -62,13 +63,14 @@ export default function Fitness({ profileData }: UsersPgProps) {
                             <button onClick={scrollToContact} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                                 Contact Us
                             </button>
-
-                            <Button
-                                className="rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
-                                style={{ backgroundColor: primaryColor }}
-                            >
-                                Get Started
-                            </Button>
+                            <Link href={`/${user.username}/links`} className="">
+                                <Button
+                                    className="rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
+                                    style={{ backgroundColor: primaryColor }}
+                                >
+                                    Get Started
+                                </Button>
+                            </Link>
                         </div>
                         <button
                             onClick={() => setMenuOpen(!menuOpen)}
@@ -96,12 +98,14 @@ export default function Fitness({ profileData }: UsersPgProps) {
                             Contact Us
                         </button>
 
-                        <Button
-                            className="w-fit rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
-                            style={{ backgroundColor: primaryColor }}
-                        >
-                            Get Started
-                        </Button>
+                        <Link href={`/${user.username}/links`}>
+                            <Button
+                                className="w-full rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
+                                style={{ backgroundColor: primaryColor }}
+                            >
+                                Link
+                            </Button>
+                        </Link>
                     </div>
                 )}
 
@@ -139,19 +143,25 @@ export default function Fitness({ profileData }: UsersPgProps) {
                             </div>
                         </div>
                         <div className="flex flex-wrap gap-4 pt-4">
-                            <Button
-                                className="flex items-center gap-2 rounded-full px-6 py-3 text-lg font-semibold text-black"
-                                style={{ backgroundColor: primaryColor }}
-                            >
-                                Get Started <ArrowRight size={18} />
-                            </Button>
-                            <Button
-                                variant="outline"
-                                className="flex items-center gap-2 rounded-full px-6 py-3 text-lg font-semibold"
-                                style={{ borderColor: primaryColor, color: primaryColor }}
-                            >
-                                Explore More <ArrowRight size={18} />
-                            </Button>
+                            <Link href={`/${user.username}/links`}>
+                                <Button
+                                    size="theme"
+                                    className="flex items-center gap-2 rounded-full px-14 py-3 text-lg font-semibold text-black"
+                                    style={{ backgroundColor: primaryColor }}
+                                >
+                                    Get Started <ArrowRight size={18} />
+                                </Button>
+                            </Link>
+                            <Link href={`https://wa.me/${profile.whatsapp}`}>
+                                <Button
+                                    size="theme"
+                                    variant="secondary"
+                                    className="flex items-center gap-2 rounded-full px-14 py-3 text-lg font-semibold"
+                                    style={{ borderColor: primaryColor, color: primaryColor }}
+                                >
+                                    Talk To Us <FaWhatsapp size={18} />
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
 
@@ -168,7 +178,6 @@ export default function Fitness({ profileData }: UsersPgProps) {
 
                         <img src="/storage/theme/dumbell.png" alt="Dumbell" className="w-full max-w-sm object-contain sm:max-w-md" />
 
-                        {/* Top-right Badge */}
                         <div
                             className="absolute top-2 right-4 flex h-20 w-20 rotate-12 flex-col items-center justify-center rounded-full p-2 text-center text-xs font-bold text-black sm:h-24 sm:w-24 md:right-16"
                             style={{ backgroundColor: primaryColor }}
@@ -177,14 +186,12 @@ export default function Fitness({ profileData }: UsersPgProps) {
                             <ArrowRight className="mt-1 rotate-[-12deg]" size={18} />
                         </div>
 
-                        {/* Bottom-left Red Badge */}
                         <div className="absolute bottom-0 left-4 flex h-20 w-20 rotate-[-12deg] flex-col items-center justify-center rounded-full bg-red-600 p-2 text-center text-xs font-bold text-white shadow-lg sm:h-24 sm:w-24 md:left-12">
                             <span className="text-[10px] leading-tight">
                                 100% <br /> FIT ZONE
                             </span>
                         </div>
 
-                        {/* Floating Icon */}
                         <motion.div
                             initial={{ y: 0 }}
                             animate={{ y: [0, -12, 0] }}
