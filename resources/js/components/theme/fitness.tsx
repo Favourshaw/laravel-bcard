@@ -12,10 +12,21 @@ export default function Fitness({ profileData }: UsersPgProps) {
     const [menuOpen, setMenuOpen] = useState(false);
     const aboutRef = useRef(null);
 
+    const classesRef = useRef(null);
+    const contactRef = useRef(null);
+
     const scrollToAbout = () => {
         if (aboutRef.current) {
             aboutRef.current.scrollIntoView({ behavior: 'smooth' });
         }
+    };
+
+    const scrollToClasses = () => {
+        classesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const scrollToContact = () => {
+        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     const primaryColor = user.colors?.primary || 'orange';
@@ -44,16 +55,14 @@ export default function Fitness({ profileData }: UsersPgProps) {
                             <button onClick={scrollToAbout} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                                 About Us
                             </button>
-                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                            <button onClick={scrollToClasses} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                                 Classes
-                            </a>
-                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                                Map
-                            </a>
+                            </button>
 
-                            <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                            <button onClick={scrollToContact} className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                                 Contact Us
-                            </a>
+                            </button>
+
                             <Button
                                 className="rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
                                 style={{ backgroundColor: primaryColor }}
@@ -79,18 +88,14 @@ export default function Fitness({ profileData }: UsersPgProps) {
                         <button onClick={scrollToAbout} className="text-left transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                             About Us
                         </button>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Services
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Blog
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
-                            Pages
-                        </a>
-                        <a href="#" className="transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                        <button onClick={scrollToClasses} className="text-left transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
+                            Classes
+                        </button>
+
+                        <button onClick={scrollToContact} className="text-left transition-opacity hover:opacity-80" style={{ color: primaryColor }}>
                             Contact Us
-                        </a>
+                        </button>
+
                         <Button
                             className="w-fit rounded-full px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
                             style={{ backgroundColor: primaryColor }}
@@ -250,17 +255,22 @@ export default function Fitness({ profileData }: UsersPgProps) {
                         </Button>
                     </div>
                 </div>
-            </div>{' '}
-            <FitnessClasses primaryColor={primaryColor} />
-            <Footer
-                bmail={profile.bmail}
-                bname={profile.bname}
-                logo={logoUrl}
-                phone={profile.phone}
-                location={profile.location}
-                slogan={profile.slogan}
-                primaryColor={primaryColor}
-            />
+            </div>
+            <div ref={classesRef}>
+                <FitnessClasses primaryColor={primaryColor} />
+            </div>
+
+            <div ref={contactRef}>
+                <Footer
+                    bmail={profile.bmail}
+                    bname={profile.bname}
+                    logo={logoUrl}
+                    phone={profile.phone}
+                    location={profile.location}
+                    slogan={profile.slogan}
+                    primaryColor={primaryColor}
+                />
+            </div>
         </div>
     );
 }
