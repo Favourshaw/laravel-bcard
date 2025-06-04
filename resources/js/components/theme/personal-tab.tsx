@@ -1,4 +1,5 @@
 import { UsersPgProps } from '@/types/userPgProps';
+import { Head } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import PersonalAbout1 from './personal1/about';
@@ -25,8 +26,11 @@ export default function Personal1({ profileData }: UsersPgProps) {
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
+    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
 
     const tabs = ['About Me', 'Resume', 'Portfolio', 'Blog', 'Contact'];
+
+    const primaryColor = user.colors?.primary || '#155dfc';
 
     const renderTabContent = () => {
         switch (activeTab) {
@@ -40,7 +44,15 @@ export default function Personal1({ profileData }: UsersPgProps) {
                         transition={{ duration: 0.3 }}
                         className="p-6 md:p-12"
                     >
-                        <PersonalAbout1 bio={profile.bio} bname={profile.bname} avatar={avatarUrl} skills={profile.skills} />
+                        <PersonalAbout1
+                            bio={profile.bio}
+                            bname={profile.bname}
+                            avatar={avatarUrl}
+                            skills={profile.skills}
+                            slogan={profile.slogan}
+                            description={profile.description}
+                            color={primaryColor}
+                        />
                     </motion.section>
                 );
             case 'Resume':
@@ -74,8 +86,9 @@ export default function Personal1({ profileData }: UsersPgProps) {
 
     return (
         <div className="flex min-h-screen flex-col text-gray-800 md:flex-row">
+            <Head title={`${user.name} - Home Page`} />
             <div className="flex items-center justify-between bg-white p-4 shadow md:hidden">
-                <h1 className="text-lg font-bold">Alex Smith</h1>
+                <h1 className="text-lg font-bold">{profile.bname}</h1>
                 <button onClick={() => setSidebarOpen(!sidebarOpen)} className="rounded bg-gray-200 p-2">
                     {sidebarOpen ? 'Close' : 'Menu'}
                 </button>
@@ -90,8 +103,8 @@ export default function Personal1({ profileData }: UsersPgProps) {
                         transition={{ type: 'tween' }}
                         className="fixed top-0 left-0 z-50 flex h-full w-64 flex-col items-center border-r bg-white p-6 md:static md:block md:flex md:h-auto md:w-64"
                     >
-                        <img src="/profile.jpg" alt="Alex Smith" className="h-24 w-24 rounded-full object-cover" />
-                        <h1 className="mt-4 text-center text-xl font-bold">Alex Smith</h1>
+                        <img src={logoUrl} alt="Alex Smith" className="h-24 w-24 rounded-full object-cover" />
+                        <h1 className="mt-4 text-center text-xl font-bold">{profile.bname} </h1>
                         <nav className="mt-8 w-full">
                             {tabs.map((item) => (
                                 <button
@@ -100,9 +113,8 @@ export default function Personal1({ profileData }: UsersPgProps) {
                                         setActiveTab(item);
                                         if (isMobile) setSidebarOpen(false);
                                     }}
-                                    className={`block w-full border-l-4 px-4 py-2 text-left hover:bg-gray-100 ${
-                                        activeTab === item ? 'border-blue-500' : 'border-transparent'
-                                    }`}
+                                    className={`block w-full border-l-4 px-4 py-2 text-left hover:bg-gray-100`}
+                                    style={{ borderColor: activeTab === item ? primaryColor : 'inherit' }}
                                 >
                                     {item}
                                 </button>

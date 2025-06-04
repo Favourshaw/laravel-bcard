@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 
 interface PersonalProps {
   skills?: string[];
+  color?: string;
 }
 
-const AnimatedSkills = ({ skills = [] }: PersonalProps) => {
+const AnimatedSkills = ({ skills = [], color }: PersonalProps) => {
   const [currentSkill, setCurrentSkill] = useState(0);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const AnimatedSkills = ({ skills = [] }: PersonalProps) => {
 
   return (
     <div className="flex items-center">
-      <span className="text-blue-500 min-h-[24px]">
+      <span className=" min-h-[24px]"  style={{ color: color}}>
         <AnimatePresence mode="wait">
           <motion.span
             key={skills[currentSkill]}
