@@ -3,6 +3,8 @@ import { Head } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import PersonalAbout1 from './personal1/about';
+import PersonalContact1 from './personal1/contact';
+import PersonalSkills1 from './personal1/skills';
 
 export default function Personal1({ profileData }: UsersPgProps) {
     const { user, profile = {} } = profileData;
@@ -64,7 +66,15 @@ export default function Personal1({ profileData }: UsersPgProps) {
             case 'Portfolio':
                 return (
                     <motion.section key="Portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
-                        Portfolio content goes here.
+                        <PersonalSkills1
+                            bio={profile.bio}
+                            bname={profile.bname}
+                            avatar={avatarUrl}
+                            skills={profile.skills}
+                            slogan={profile.slogan}
+                            description={profile.description}
+                            color={primaryColor}
+                        />
                     </motion.section>
                 );
             case 'Blog':
@@ -76,7 +86,15 @@ export default function Personal1({ profileData }: UsersPgProps) {
             case 'Contact':
                 return (
                     <motion.section key="Contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
-                        Contact content goes here.
+                        <PersonalContact1
+                            bio={profile.bio}
+                            bname={profile.bname}
+                            avatar={avatarUrl}
+                            skills={profile.skills}
+                            slogan={profile.slogan}
+                            description={profile.description}
+                            color={primaryColor}
+                        />
                     </motion.section>
                 );
             default:
