@@ -87,12 +87,13 @@ export default function Personal1({ profileData }: UsersPgProps) {
                 return (
                     <motion.section key="Contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
                         <PersonalContact1
-                            bio={profile.bio}
-                            bname={profile.bname}
-                            avatar={avatarUrl}
-                            skills={profile.skills}
+                            bmail={profile.bmail}
+                            username={user.username}
+                            whatsapp={profile.whatsapp}
+                            phone={profile.phone}
                             slogan={profile.slogan}
-                            description={profile.description}
+                            bname={profile.bname}
+                            location={profile.location}
                             color={primaryColor}
                         />
                     </motion.section>
