@@ -106,98 +106,79 @@ export default function SplashCursor({
       config.DYE_RESOLUTION = 256;
       config.SHADING = false;
     }
-
-    function getWebGLContext(canvas: HTMLCanvasElement) {
-      const params = {
+function getWebGLContext(canvas: HTMLCanvasElement) {
+    const params: WebGLContextAttributes = {
         alpha: true,
         depth: false,
         stencil: false,
         antialias: false,
         preserveDrawingBuffer: false,
-      };
+    };
 
-      let gl = canvas.getContext(
-        "webgl2",
-        params
-      ) as WebGL2RenderingContext | null;
+    let gl = canvas.getContext("webgl2", params) as WebGL2RenderingContext | null;
 
-      if (!gl) {
+    if (!gl) {
         gl = (canvas.getContext("webgl", params) ||
-          canvas.getContext(
-            "experimental-webgl",
-            params
-          )) as WebGL2RenderingContext | null;
-      }
+            canvas.getContext("experimental-webgl", params)) as WebGLRenderingContext | null;
+    }
 
-      if (!gl) {
+    if (!gl) {
         throw new Error("Unable to initialize WebGL.");
-      }
+    }
 
-      const isWebGL2 = "drawBuffers" in gl;
+    const isWebGL2 = "drawBuffers" in gl;
 
-      let supportLinearFiltering = false;
-      let halfFloat = null;
+    let supportLinearFiltering = false;
+    let halfFloat: OES_texture_half_float | null = null;
 
-      if (isWebGL2) {
+    if (isWebGL2) {
         // For WebGL2
-        (gl as WebGL2RenderingContext).getExtension("EXT_color_buffer_float");
-        supportLinearFiltering = !!(gl as WebGL2RenderingContext).getExtension(
-          "OES_texture_float_linear"
-        );
-      } else {
+        gl.getExtension("EXT_color_buffer_float");
+        supportLinearFiltering = !!gl.getExtension("OES_texture_float_linear");
+    } else {
         // For WebGL1
         halfFloat = gl.getExtension("OES_texture_half_float");
-        supportLinearFiltering = !!gl.getExtension(
-          "OES_texture_half_float_linear"
-        );
-      }
+        supportLinearFiltering = !!gl.getExtension("OES_texture_half_float_linear");
+    }
 
-      gl.clearColor(0, 0, 0, 1);
+    gl.clearColor(0, 0, 0, 1);
 
-      const halfFloatTexType = isWebGL2
-        ? (gl as WebGL2RenderingContext).HALF_FLOAT
-        : (halfFloat && (halfFloat as any).HALF_FLOAT_OES) || 0;
+    const halfFloatTexType = isWebGL2
+        ? gl.HALF_FLOAT
+        : (halfFloat?.HALF_FLOAT_OES ?? 0);
 
-      let formatRGBA: any;
-      let formatRG: any;
-      let formatR: any;
+    let formatRGBA: number;
+    let formatRG: number;
+    let formatR: number;
 
-      if (isWebGL2) {
-        formatRGBA = getSupportedFormat(
-          gl,
-          (gl as WebGL2RenderingContext).RGBA16F,
-          gl.RGBA,
-          halfFloatTexType
-        );
-        formatRG = getSupportedFormat(
-          gl,
-          (gl as WebGL2RenderingContext).RG16F,
-          (gl as WebGL2RenderingContext).RG,
-          halfFloatTexType
-        );
-        formatR = getSupportedFormat(
-          gl,
-          (gl as WebGL2RenderingContext).R16F,
-          (gl as WebGL2RenderingContext).RED,
-          halfFloatTexType
-        );
-      } else {
+    if (isWebGL2) {
+        const webgl2Gl = gl as WebGL2RenderingContext;
+        formatRGBA = getSupportedFormat(webgl2Gl, webgl2Gl.RGBA16F, webgl2Gl.RGBA, halfFloatTexType);
+        formatRG = getSupportedFormat(webgl2Gl, webgl2Gl.RG16F, webgl2Gl.RG, halfFloatTexType);
+        formatR = getSupportedFormat(webgl2Gl, webgl2Gl.R16F, webgl2Gl.RED, halfFloatTexType);
+    } else {
         formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
         formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
         formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-      }
+    }
 
-      return {
+    return {
         gl,
         ext: {
-          formatRGBA,
-          formatRG,
-          formatR,
-          halfFloatTexType,
-          supportLinearFiltering,
+            formatRGBA,
+            formatRG,
+            formatR,
+            halfFloatTexType,
+            supportLinearFiltering,
         },
-      };
-    }
+    };
+}
+
+// Assuming this is the signature of your getSupportedFormat function
+function getSupportedFormat(gl: WebGLRenderingContext | WebGL2RenderingContext, internalFormat: number, format: number, type: number): number {
+    // Implementation would check for supported formats
+    return internalFormat;
+}
 
     function getSupportedFormat(
       gl: WebGLRenderingContext | WebGL2RenderingContext,
@@ -1520,7 +1501,7 @@ export default function SplashCursor({
         updatePointerUpData(pointer);
       }
     });
-    
+    // ------------------------------------------------------------
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,
