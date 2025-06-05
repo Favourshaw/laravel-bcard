@@ -2,6 +2,7 @@ import { UsersPgProps } from '@/types/userPgProps';
 import { Head } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import PersonalAbout1 from './personal1/about';
 import PersonalContact1 from './personal1/contact';
 import PersonalSkills1 from './personal1/skills';
@@ -30,7 +31,7 @@ export default function Personal1({ profileData }: UsersPgProps) {
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
 
-    const tabs = ['About Me', 'Resume', 'Portfolio', 'Blog', 'Contact'];
+    const tabs = ['About Me', 'Portfolio', 'Contact'];
 
     const primaryColor = user.colors?.primary || '#155dfc';
 
@@ -57,32 +58,14 @@ export default function Personal1({ profileData }: UsersPgProps) {
                         />
                     </motion.section>
                 );
-            case 'Resume':
-                return (
-                    <motion.section key="Resume" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
-                        Resume content goes here.
-                    </motion.section>
-                );
+
             case 'Portfolio':
                 return (
                     <motion.section key="Portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6 lg:p-16">
-                        <PersonalSkills1
-                            bio={profile.bio}
-                            bname={profile.bname}
-                            avatar={avatarUrl}
-                            skills={profile.skills}
-                            slogan={profile.slogan}
-                            description={profile.description}
-                            color={primaryColor}
-                        />
+                        <PersonalSkills1 skills={profile.skills} color={primaryColor} />
                     </motion.section>
                 );
-            case 'Blog':
-                return (
-                    <motion.section key="Blog" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
-                        Blog content goes here.
-                    </motion.section>
-                );
+
             case 'Contact':
                 return (
                     <motion.section key="Contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
@@ -140,13 +123,19 @@ export default function Personal1({ profileData }: UsersPgProps) {
                             ))}
                         </nav>
                         <div className="mt-auto flex space-x-3 pt-6">
-                            {['twitter', 'linkedin', 'github'].map((icon, i) => (
-                                <a key={i} href="#">
-                                    <img src={`/${icon}.svg`} alt={icon} className="h-4 w-4" />
-                                </a>
-                            ))}
+                            <a href={`https://wa.me/${profile.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                                <FaWhatsapp className="h-4 w-4" />
+                            </a>
+
+                            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                                <FaLinkedin className="h-4 w-4" />
+                            </a>
+
+                            <a href={profile.twitter} target="_blank" rel="noopener noreferrer">
+                                <FaTwitter className="h-4 w-4" />
+                            </a>
                         </div>
-                        <p className="mt-4 text-xs text-gray-400">© 2020 All rights reserved.</p>
+                        <p className="mt-4 text-xs text-gray-400">© 2025 All rights reserved.</p>
                     </motion.aside>
                 )}
             </AnimatePresence>
