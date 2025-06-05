@@ -10,14 +10,17 @@ export default function PersonalSkills1({ skills, color }: FitnessProps) {
     return (
         <div className="relative">
             <div className="">
-                <div className="relative mt-4 flex flex-wrap gap-2">
+                <h1 className="my-9 text-6xl font-bold" style={{ color: color }}>
+                    SKILLS
+                </h1>
+                <div className="relative mt-4 flex flex-wrap items-center justify-center gap-2">
                     {skills.map((skill, index) => (
                         <motion.span
                             key={skill}
                             initial={{ opacity: 0, y: 10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             transition={{ delay: index * 0.1, duration: 0.3 }}
-                            className="relative h-[600px]"
+                            className="relative"
                         >
                             <GlareHover
                                 glareColor={'#ffffff'}
