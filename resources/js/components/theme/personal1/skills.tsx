@@ -10,7 +10,7 @@ export default function PersonalSkills1({ skills, color }: FitnessProps) {
     return (
         <div className="relative">
             <div className="">
-                <h1 className="my-9 text-6xl font-bold" style={{ color: color }}>
+                <h1 className="mb-9 border border-transparent border-b-gray-200 p-4 text-2xl font-bold" style={{ color: color }}>
                     SKILLS
                 </h1>
                 <div className="relative mt-4 flex flex-wrap items-center justify-center gap-2">

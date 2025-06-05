@@ -65,7 +65,7 @@ export default function Personal1({ profileData }: UsersPgProps) {
                 );
             case 'Portfolio':
                 return (
-                    <motion.section key="Portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6">
+                    <motion.section key="Portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6 lg:p-16">
                         <PersonalSkills1
                             bio={profile.bio}
                             bname={profile.bname}
