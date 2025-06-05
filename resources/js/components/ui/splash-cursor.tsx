@@ -1520,7 +1520,7 @@ export default function SplashCursor({
         updatePointerUpData(pointer);
       }
     });
-    // ------------------------------------------------------------
+    
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,
