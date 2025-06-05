@@ -175,7 +175,7 @@ function getWebGLContext(canvas: HTMLCanvasElement) {
 }
 
 // Assuming this is the signature of your getSupportedFormat function
-function getSupportedFormat(gl: WebGLRenderingContext | WebGL2RenderingContext, internalFormat: number, format: number, type: number): number {
+function getSupportedFormat(gl: WebGLRenderingContext | WebGL2RenderingContext, internalFormat: number): number {
     // Implementation would check for supported formats
     return internalFormat;
 }
