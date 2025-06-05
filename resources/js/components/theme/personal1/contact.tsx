@@ -8,12 +8,11 @@ interface FitnessProps {
     avatar?: string;
     bname?: string;
     slogan?: string;
-    description?: string;
     skills?: string[];
     color?: string;
 }
 
-export default function PersonalContact1({ bio, bname, avatar, skills, slogan, description, color }: FitnessProps) {
+export default function PersonalContact1({ bio, bname, avatar, skills, slogan, color }: FitnessProps) {
     return (
         <div>
             <div className="flex flex-col gap-8 md:flex-row md:gap-20">

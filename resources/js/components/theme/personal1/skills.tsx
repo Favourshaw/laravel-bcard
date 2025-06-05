@@ -20,13 +20,13 @@ export default function PersonalSkills1({ skills, color }: FitnessProps) {
                             className="relative h-[600px]"
                         >
                             <GlareHover
-                                glareColor={color || '#ffffff'}
+                                glareColor={'#ffffff'}
                                 glareOpacity={0.3}
                                 glareAngle={-30}
                                 width="380px"
                                 height="150px"
                                 glareSize={300}
-                                background="white"
+                                background="#000"
                                 transitionDuration={800}
                                 playOnce={false}
                             >
