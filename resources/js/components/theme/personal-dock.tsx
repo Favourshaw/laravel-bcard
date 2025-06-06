@@ -12,10 +12,7 @@ export default function Personal2({ profileData }: UsersPgProps) {
 
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
-    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
-    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
-
-    const primaryColor = user.colors?.primary || '#155dfc';
+    const primaryColor = user.colors?.primary || '#05df72';
 
     const items = [
         { icon: <HomeIcon size={25} />, label: 'Home', onClick: () => alert('Home!') },
@@ -28,7 +25,17 @@ export default function Personal2({ profileData }: UsersPgProps) {
         <div className="flex min-h-screen flex-col bg-black md:flex-row">
             <SplashCursor />
             <Head title={`${user.name} - Home Page`} />
-            <Hero2 />
+            <Hero2
+                name={user.name}
+                slogan={profile.slogan}
+                linkedin={profile.linkedin}
+                instagram={profile.instagram}
+                bmail={profile.bmail}
+                color={primaryColor}
+                twitter={profile.twitter}
+                username={user.username}
+                skills={profile.skills}
+            />
 
             <Dock
                 items={items}

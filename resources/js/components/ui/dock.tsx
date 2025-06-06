@@ -160,10 +160,11 @@ export default function Dock({
   const mouseX = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);
 
-  const maxHeight = useMemo(
-    () => Math.max(dockHeight, magnification + magnification / 2 + 4),
-    [magnification]
-  );
+ const maxHeight = useMemo(
+  () => Math.max(dockHeight, magnification + magnification / 2 + 4),
+  [dockHeight, magnification]
+);
+
   const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
   const height = useSpring(heightRow, spring);
 
