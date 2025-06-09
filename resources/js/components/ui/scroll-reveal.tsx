@@ -1,46 +1,41 @@
-import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from "react";
+import React, { useEffect, useMemo, useRef, ReactNode, RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface ScrollRevealProps {
+interface ScrollFloatProps {
   children: ReactNode;
   scrollContainerRef?: RefObject<HTMLElement>;
-  enableBlur?: boolean;
-  baseOpacity?: number;
-  baseRotation?: number;
-  blurStrength?: number;
   containerClassName?: string;
   textClassName?: string;
-  rotationEnd?: string;
-  wordAnimationEnd?: string;
+  animationDuration?: number;
+  ease?: string;
+  scrollStart?: string;
+  scrollEnd?: string;
+  stagger?: number;
 }
 
-const ScrollReveal: React.FC<ScrollRevealProps> = ({
+const ScrollFloat: React.FC<ScrollFloatProps> = ({
   children,
   scrollContainerRef,
-  enableBlur = true,
-  baseOpacity = 0.4,
-  baseRotation = 6,
-  blurStrength = 9,
   containerClassName = "",
   textClassName = "",
-  rotationEnd = "bottom bottom",
-  wordAnimationEnd = "bottom bottom",
+  animationDuration = 1,
+  ease = "back.inOut(2)",
+  scrollStart = "center bottom+=50%",
+  scrollEnd = "bottom bottom-=40%",
+  stagger = 0.03
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
 
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
-      return (
-        <span className="word" key={index}>
-          {word}
-        </span>
-      );
-    });
+    return text.split("").map((char, index) => (
+      <span className="char" key={index}>
+        {char === " " ? "\u00A0" : char}
+      </span>
+    ));
   }, [children]);
 
   useEffect(() => {
@@ -52,81 +47,49 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         ? scrollContainerRef.current
         : window;
 
-    // Container rotation animation
-    gsap.fromTo(
-      el,
-      { transformOrigin: "0% 50%", rotate: baseRotation },
-      {
-        ease: "none",
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: "top bottom",
-          end: rotationEnd,
-          scrub: true,
-        },
-      }
-    );
+    const charElements = el.querySelectorAll(".char");
 
-    const wordElements = el.querySelectorAll<HTMLElement>(".word");
-
-    // Word opacity animation
     gsap.fromTo(
-      wordElements,
-      { opacity: baseOpacity, willChange: "opacity" },
+      charElements,
       {
-        ease: "none",
+        willChange: "opacity, transform",
+        opacity: 0,
+        yPercent: 120,
+        scaleY: 2.3,
+        scaleX: 0.7,
+        transformOrigin: "50% 0%"
+      },
+      {
+        duration: animationDuration,
+        ease: ease,
         opacity: 1,
-        stagger: 0.05,
+        yPercent: 0,
+        scaleY: 1,
+        scaleX: 1,
+        stagger: stagger,
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: "top bottom-=20%",
-          end: wordAnimationEnd,
-          scrub: true,
+          start: scrollStart,
+          end: scrollEnd,
+          scrub: true
         },
       }
     );
-
-    // Optional blur animation
-    if (enableBlur) {
-      gsap.fromTo(
-        wordElements,
-        { filter: `blur(${blurStrength}px)` },
-        {
-          ease: "none",
-          filter: "blur(0px)",
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: "top bottom-=20%",
-            end: wordAnimationEnd,
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
   }, [
     scrollContainerRef,
-    enableBlur,
-    baseRotation,
-    baseOpacity,
-    rotationEnd,
-    wordAnimationEnd,
-    blurStrength,
+    animationDuration,
+    ease,
+    scrollStart,
+    scrollEnd,
+    stagger
   ]);
 
   return (
-    <h2 ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
-      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
+    <h2 ref={containerRef} className={`scroll-float ${containerClassName}`}>
+      <span className={`scroll-float-text ${textClassName}`}>{splitText}</span>
     </h2>
   );
 };
 
-export default ScrollReveal;
+export default ScrollFloat;
