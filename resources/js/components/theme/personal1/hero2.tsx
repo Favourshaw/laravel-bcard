@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import ShinyText from '@/components/ui/shiny-text';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, HandIcon } from 'lucide-react';
@@ -52,10 +53,17 @@ export default function PersonalContact1({ bmail, linkedin, color, instagram, na
                     <div className="w-full">
                         <hr className="min-w-ful h-2 text-green-50" />
                     </div>
-                    <p className="max-w-xl text-sm text-white/70">
-                        I work with brands globally to build pixel-perfect, engaging, and accessible digital experiences that drive results and
-                        achieve business goals.
-                    </p>
+                    <p className="max-w-xl text-sm text-white/70"></p>
+
+                    <ShinyText
+                        text={
+                            slogan ||
+                            'I am a passionate creator dedicated to building meaningful connections through innovative design and storytelling. My mission is to transform ideas into engaging experiences that resonate with people.'
+                        }
+                        disabled={false}
+                        speed={3}
+                        className="custom-class"
+                    />
                 </motion.div>
                 <div className="flex flex-wrap justify-between gap-4 md:gap-6">
                     <motion.div
