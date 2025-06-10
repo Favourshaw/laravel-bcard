@@ -15,7 +15,6 @@ export default function Personal2({ profileData }: UsersPgProps) {
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
     const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
-    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
 
     const primaryColor = user.colors?.primary || '#05df72';
 
