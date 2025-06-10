@@ -65,7 +65,7 @@ export default function Personal2({ profileData }: UsersPgProps) {
                     panelHeight={68}
                     baseItemSize={60}
                     magnification={90}
-                    className="fixed bottom-0 left-0 mb-auto border border-transparent bg-black text-white shadow-md shadow-amber-50"
+                    className="fixed bottom-0 left-0 z-50 mb-auto border border-transparent bg-black text-white shadow-md shadow-amber-50"
                 />
             </div>
 
