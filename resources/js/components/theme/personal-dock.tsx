@@ -71,7 +71,7 @@ export default function Personal2({ profileData }: UsersPgProps) {
             </div>
 
             <div id="about-section">
-                <About2 bname={profile.bname} />
+                <About2 bname={profile.bname} avatar={avatarUrl} description={profile.description} />
             </div>
 
             <div id="contact-section">
