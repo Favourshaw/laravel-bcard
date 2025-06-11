@@ -1,0 +1,68 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pot Shadow -->
+  <ellipse cx="150" cy="280" rx="60" ry="10" fill="#333" opacity="0.3" />
+
+  <!-- Pot Body -->
+  <path d="M110 130v60a40 30 0 0 0 80 0v-60z" fill="#444" stroke="#222" stroke-width="2" />
+  <ellipse cx="150" cy="130" rx="40" ry="10" fill="#666" stroke="#222" stroke-width="2" />
+
+  <!-- Pot Handles -->
+  <path d="M90 140a10 10 0 0 1 -20 0a10 10 0 0 1 20 0z" fill="#555" stroke="#333" stroke-width="2" />
+  <path d="M230 140a10 10 0 0 0 20 0a10 10 0 0 0 -20 0z" fill="#555" stroke="#333" stroke-width="2" />
+
+  <!-- Pot Lid -->
+  <path d="M120 110h60a5 5 0 0 1 5 5v10a35 12 0 0 1-35 12 35 12 0 0 1-35-12v-10a5 5 0 0 1 5-5z" fill="#777" stroke="#444" stroke-width="1.5" />
+  <ellipse cx="150" cy="110" rx="30" ry="6" fill="#888" />
+  <circle cx="150" cy="105" r="5" fill="#aaa" />
+
+  <!-- Steam -->
+  <g stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6">
+    <path d="M145 95c0-15 10-25 20-30">
+      <animate attributeName="d"
+               values="M145 95c0-15 10-25 20-30;
+                       M145 95c5-20 15-30 25-35;
+                       M145 95c0-15 10-25 20-30"
+               dur="6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="6s" repeatCount="indefinite" />
+    </path>
+
+    <path d="M150 95c0-12 5-18 12-24">
+      <animate attributeName="d"
+               values="M150 95c0-12 5-18 12-24;
+                       M150 95c5-15 15-22 20-28;
+                       M150 95c0-12 5-18 12-24"
+               dur="5.5s" repeatCount="indefinite" begin="1s"/>
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="5.5s" repeatCount="indefinite" begin="1s"/>
+    </path>
+
+    <path d="M155 95c0-10 8-15 15-20">
+      <animate attributeName="d"
+               values="M155 95c0-10 8-15 15-20;
+                       M155 95c3-12 12-18 18-25;
+                       M155 95c0-10 8-15 15-20"
+               dur="6.2s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6.2s" repeatCount="indefinite" begin="2s"/>
+    </path>
+  </g>
+
+  <!-- Small Steam Particles -->
+  <circle cx="148" cy="80" r="2" fill="#fff" opacity="0">
+    <animate attributeName="cy" values="80;60;40" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0;0.5;0" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="r" values="2;3;2" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="152" cy="85" r="1.5" fill="#fff" opacity="0">
+    <animate attributeName="cy" values="85;65;45" dur="3.5s" repeatCount="indefinite" begin="1s" />
+    <animate attributeName="opacity" values="0;0.4;0" dur="3.5s" repeatCount="indefinite" begin="1s" />
+  </circle>
+
+  <!-- Heat Glow Effect -->
+  <radialGradient id="heatGlow" cx="150" cy="200" r="30" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#f80" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#f80" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="150" cy="200" r="25" fill="url(#heatGlow)" opacity="0.5">
+    <animate attributeName="r" values="25;30;25" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0.3;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>
