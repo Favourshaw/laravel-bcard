@@ -11,7 +11,7 @@ interface contactProps {
 
 export default function FooterFood({ location, name, username }: contactProps) {
     return (
-        <div className="flex flex-col items-center justify-between bg-gradient-to-r from-[#021024] to-[#001d3d] px-4 pt-20 pb-40 font-sans text-white">
+        <div className="flex flex-col items-center justify-between bg-gradient-to-b from-[#1f3844] to-[#021024] px-4 pt-20 pb-40 font-sans text-white">
             <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}

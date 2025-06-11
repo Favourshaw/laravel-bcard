@@ -7,7 +7,7 @@ interface FitnessProps {
 
 export default function FoodMenu({ skills, color }: FitnessProps) {
     return (
-        <section className="relative bg-[#153240] px-4 py-16 text-white md:px-12">
+        <section className="relative bg-gradient-to-t from-[#1f3844] to-[#153240] px-4 py-16 text-white md:px-12">
             <img src="storage/theme/food-menu1.png" className="absolute top-10 left-10 w-48 opacity-30" alt="sandwich" />
             <img src="storage/theme/food-menu2.png" className="absolute right-10 bottom-10 w-44 opacity-40" alt="burger" />
             <div className="container mx-auto max-w-7xl">

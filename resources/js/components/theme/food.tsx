@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import ScrollToTop from '../ui/ScrollToTop';
+import AboutFood from './food/about';
 import FooterFood from './food/footer-food';
 import FoodMenu from './food/menu';
 
@@ -20,13 +21,17 @@ export default function Food({ profileData }: UsersPgProps) {
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
 
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
+    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const primaryColor = user.colors?.primary || '#05df72';
 
-    const navItems = ['Home', 'Pages', 'Menu', 'Blog', 'Shop'];
+    const navItems = ['Home', 'About', 'Menu', 'Contact'];
 
     return (
         <>
-            <div className="relative min-h-screen overflow-hidden bg-gradient-to-r from-[#021024] to-[#001d3d] text-white">
+            <section
+                id="home"
+                className="relative min-h-screen max-w-full overflow-hidden bg-gradient-to-r from-[#021024] to-[#001d3d] py-28 text-white md:py-0"
+            >
                 <Head title={`${user.name} - ${profile.bname}`} />
                 <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-black/30 px-8 py-4 shadow-md backdrop-blur-lg">
                     <div className="flex items-center gap-2">
@@ -35,8 +40,16 @@ export default function Food({ profileData }: UsersPgProps) {
 
                     <ul className="hidden gap-8 font-medium md:flex">
                         {navItems.map((item) => (
-                            <li key={item} className="cursor-pointer underline-offset-8 transition hover:text-gray-300 hover:underline">
-                                {item}
+                            <li key={item}>
+                                <button
+                                    onClick={() => {
+                                        const el = document.getElementById(item.toLowerCase());
+                                        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }}
+                                    className="cursor-pointer underline-offset-8 transition hover:text-gray-300 hover:underline"
+                                >
+                                    {item}
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -75,13 +88,6 @@ export default function Food({ profileData }: UsersPgProps) {
                                     {item}
                                 </motion.div>
                             ))}
-                            <Button
-                                className="mt-6 rounded-full px-6 py-3 text-lg font-semibold"
-                                style={{ background: primaryColor }}
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Reservation
-                            </Button>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -128,7 +134,6 @@ export default function Food({ profileData }: UsersPgProps) {
                     }}
                 />
 
-                {/* Hero Content */}
                 <div className="relative z-10 container mx-auto min-h-screen max-w-7xl items-center justify-between px-6 pt-32 md:flex">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -171,10 +176,17 @@ export default function Food({ profileData }: UsersPgProps) {
                   50% { transform: translateY(-10px); }
                 }
             `}</style>
-            </div>
-            <FoodMenu skills={profile.skills} color={primaryColor} />
+            </section>
+            <section id="about">
+                <AboutFood description={profile.description} slogan={profile.slogan} color={primaryColor} avatar={avatarUrl} phone={profile.phone} />
+            </section>
+            <section id="menu">
+                <FoodMenu skills={profile.skills} color={primaryColor} />
+            </section>
+            <section id="contact">
+                <FooterFood location={profile.location} name={user.name} username={user.username} />
+            </section>
             <ScrollToTop />
-            <FooterFood location={profile.location} name={user.name} username={user.username} />
         </>
     );
 }
