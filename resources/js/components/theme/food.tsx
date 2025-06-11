@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import ScrollToTop from '../ui/ScrollToTop';
+import FooterFood from './food/footer-food';
 import FoodMenu from './food/menu';
 
 export default function Food({ profileData }: UsersPgProps) {
@@ -172,6 +173,7 @@ export default function Food({ profileData }: UsersPgProps) {
             </div>
             <FoodMenu skills={profile.skills} color={primaryColor} />
             <ScrollToTop />
+            <FooterFood location={profile.location} name={user.name} username={user.username} />
         </>
     );
 }
