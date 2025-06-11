@@ -7,12 +7,12 @@ import { Button } from '../ui/button';
 import ScrollToTop from '../ui/ScrollToTop';
 import FoodMenu from './food/menu';
 
-const [mounted, setMounted] = useState(false);
-const [menuOpen, setMenuOpen] = useState(false);
-
-useEffect(() => setMounted(true), []);
-
 export default function Food({ profileData }: UsersPgProps) {
+    const [mounted, setMounted] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
     const { user, profile = {} } = profileData;
     if (!user) return null;
 
