@@ -1,6 +1,6 @@
 import { UsersPgProps } from '@/types/userPgProps';
-import { Head } from '@inertiajs/react';
-import { Archive, Contact, HomeIcon, User2Icon } from 'lucide-react';
+import { Head, router } from '@inertiajs/react';
+import { Contact, HomeIcon, Link, User2Icon } from 'lucide-react';
 import Dock from '../ui/dock';
 import SplashCursor from '../ui/splash-cursor';
 import About2 from './personal1/about2';
@@ -21,7 +21,7 @@ export default function Personal2({ profileData }: UsersPgProps) {
     const items = [
         { icon: <HomeIcon size={25} />, label: 'Home', onClick: () => alert('Home!') },
         {
-            icon: <Archive size={25} />,
+            icon: <User2Icon size={25} />,
             label: 'About',
             onClick: () => {
                 const aboutSection = document.getElementById('about-section');
@@ -30,16 +30,21 @@ export default function Personal2({ profileData }: UsersPgProps) {
                 }
             },
         },
-        { icon: <User2Icon size={25} />, label: 'Profile', onClick: () => alert('Profile!') },
+
         {
             icon: <Contact size={25} />,
-            label: 'Settings',
+            label: 'Contact us',
             onClick: () => {
                 const contactSection = document.getElementById('contact-section');
                 if (contactSection) {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
             },
+        },
+        {
+            icon: <Link size={25} />,
+            label: 'My Links',
+            onClick: () => router.visit(`/${user.username}/links`),
         },
     ];
 
