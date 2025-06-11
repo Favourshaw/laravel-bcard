@@ -1,5 +1,5 @@
 import { UsersPgProps } from '@/types/userPgProps';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -27,6 +27,7 @@ export default function Food({ profileData }: UsersPgProps) {
     return (
         <>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-r from-[#021024] to-[#001d3d] text-white">
+                <Head title={`${user.name} - ${profile.bname}`} />
                 <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-black/30 px-8 py-4 shadow-md backdrop-blur-lg">
                     <div className="flex items-center gap-2">
                         <img src={logoUrl} alt={profile.bname} className="h-10 drop-shadow-lg" />
