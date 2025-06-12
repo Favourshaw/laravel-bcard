@@ -39,7 +39,9 @@ export default function AboutFood({ color, description, phone, slogan, avatar }:
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <p className="mb-2 text-sm font-semibold tracking-widest text-red-500 uppercase">Our Story</p>
+                    <p className="mb-2 text-sm font-semibold tracking-widest uppercase" style={{ color: color }}>
+                        Our Story
+                    </p>
                     <h2 className="mb-4 text-4xl leading-tight font-extrabold md:text-5xl">{slogan || 'Delicious Food Delivered Fast'}</h2>
                     <hr className="my-6 border-white/30" />
                     <p className="text-lg leading-relaxed text-gray-300">
