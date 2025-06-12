@@ -12,7 +12,6 @@ export default function AboutFood({ color, description, phone, slogan, avatar }:
     return (
         <section className="bg-gradient-to-t from-[#16323f] to-[#001d3d] px-6 py-16 text-white md:px-12">
             <div className="container mx-auto flex flex-col items-center gap-12 md:flex-row">
-                {/* Left: Image */}
                 <motion.div
                     className="relative w-full md:w-1/2"
                     initial={{ opacity: 0, x: -60 }}
@@ -22,7 +21,6 @@ export default function AboutFood({ color, description, phone, slogan, avatar }:
                 >
                     <img src={avatar} alt="Chef" className="w-full rounded-lg object-cover" />
 
-                    {/* Hotline box */}
                     <div className="absolute -bottom-6 left-4 flex items-center overflow-hidden rounded shadow-lg">
                         <div className="p-4 text-white" style={{ backgroundColor: color || '#ff6347' }}>
                             <Phone />
@@ -34,7 +32,6 @@ export default function AboutFood({ color, description, phone, slogan, avatar }:
                     </div>
                 </motion.div>
 
-                {/* Right: Content */}
                 <motion.div
                     className="w-full md:w-1/2"
                     initial={{ opacity: 0, x: 60 }}
