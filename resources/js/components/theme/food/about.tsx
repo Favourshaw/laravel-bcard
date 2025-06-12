@@ -10,7 +10,7 @@ interface FoodProps {
 }
 export default function AboutFood({ color, description, phone, slogan, avatar }: FoodProps) {
     return (
-        <section className="bg-[#16323f] px-6 py-16 text-white md:px-12">
+        <section className="bg-gradient-to-t from-[#16323f] to-[#001d3d] px-6 py-16 text-white md:px-12">
             <div className="container mx-auto flex flex-col items-center gap-12 md:flex-row">
                 {/* Left: Image */}
                 <motion.div
