@@ -1,3 +1,5 @@
+import { UsersPgProps } from '@/types/userPgProps';
+import { Head } from '@inertiajs/react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, Menu, Play, X } from 'lucide-react';
 import { useRef, useState } from 'react';
@@ -23,10 +25,19 @@ const Section = ({ children, id }: { children: React.ReactNode; id: string }) =>
     );
 };
 
-export default function Beauty() {
+export default function Beauty({ profileData }: UsersPgProps) {
     const { scrollYProgress } = useScroll();
     const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const { user, profile = {} } = profileData;
+    if (!user) return null;
+
+    const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
+
+    const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
+    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
+    const primaryColor = user.colors?.primary || '#05df72';
 
     const navLinks = [
         { label: 'Home', href: '#home' },
@@ -38,13 +49,13 @@ export default function Beauty() {
 
     return (
         <main className="relative h-screen snap-y snap-mandatory overflow-y-scroll bg-white font-sans text-[#3e1f0e]">
-            {/* Scroll Progress Bar */}
+            <Head title={`${user.name} - ${profile.bname}`} />
             <motion.div className="fixed top-0 right-0 left-0 z-[999] h-1 origin-left bg-[#c96230]" style={{ scaleX }} />
 
             {/* Navbar */}
             <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-white px-6 py-4 shadow-md">
                 <div className="flex items-center space-x-2">
-                    <img src="/logo.svg" alt="Glowix Logo" className="h-8 w-8" />
+                    <img src={logoUrl} alt="Glowix Logo" className="h-8 w-8" />
                     <h1 className="text-2xl font-semibold">Glowix.</h1>
                 </div>
 
@@ -87,12 +98,17 @@ export default function Beauty() {
                 )}
             </AnimatePresence>
 
-            {/* Sections */}
             <Section id="home">
                 <div className="relative mx-auto flex h-[80vh] w-full max-w-7xl items-center justify-start overflow-hidden rounded-[30px]">
-                    <img src="storage/theme/fitness-hero.jpg" alt="Hero" className="absolute inset-0 h-full w-full rounded-[30px] object-cover" />
+                    {/* Background image with dark overlay */}
+                    <div className="absolute inset-0">
+                        <img src={avatarUrl} alt="Hero" className="h-full w-full rounded-[30px] object-cover" />
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 rounded-[30px] bg-gradient-to-r from-black/70 to-black/30"></div>
+                    </div>
+
+                    {/* Content */}
                     <div className="relative z-10 max-w-xl px-12 text-white">
-                        <p className="text-sm font-medium tracking-widest uppercase">Welcome to Glowix</p>
                         <h2 className="mt-2 font-serif text-5xl leading-tight font-bold">Discover Your Best Self With Us!</h2>
                         <p className="mt-4 text-base text-white/90">
                             Unlock your full potential with personalized coaching and expert wellness strategies.

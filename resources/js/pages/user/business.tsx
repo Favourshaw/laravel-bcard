@@ -1,3 +1,5 @@
+import Beauty from '@/components/theme/beauty';
+import BusinessTheme from '@/components/theme/business';
 import Fitness from '@/components/theme/fitness';
 import Food from '@/components/theme/food';
 import MinimalTheme from '@/components/theme/minimalTheme';
@@ -14,6 +16,8 @@ const themeComponents = {
     personal1: Personal1,
     personal2: Personal2,
     food: Food,
+    business: BusinessTheme,
+    beauty: Beauty,
 };
 
 export default function Business({ profileData, isOwner }) {
