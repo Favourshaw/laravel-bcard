@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import CircularText from '../ui/circular-text';
 import Magnet from '../ui/magnet-animation';
 
 const Section = ({ children, id }: { children: React.ReactNode; id: string }) => {
@@ -110,7 +111,7 @@ export default function Beauty({ profileData }: UsersPgProps) {
                     </div>
 
                     <div className="relative z-10 max-w-3xl px-12 text-white md:px-32">
-                        <Magnet padding={50} disabled={false} magnetStrength={50}>
+                        <Magnet padding={50} disabled={false} magnetStrength={2}>
                             <h2 className="mt-2 font-serif text-5xl leading-tight font-bold uppercase">{profile.slogan} </h2>
                             <p className="mt-4 text-base text-white/90">{profile.bio}</p>
 
@@ -128,6 +129,13 @@ export default function Beauty({ profileData }: UsersPgProps) {
                                 >
                                     <FaInstagram className="mr-2 h-4 w-4" /> instagram
                                 </a>
+                            </div>
+
+                            <div className="relative top-30 -right-24 w-[120px] md:top-20 md:-right-150">
+                                <CircularText text={profile.bname} onHover="speedUp" spinDuration={20} className="custom-class uppercase" />
+                                <span className="relative -top-6 left-9">
+                                    <img src={logoUrl} className="h-12 w-12" />
+                                </span>
                             </div>
                         </Magnet>
                     </div>
