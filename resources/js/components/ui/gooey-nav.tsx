@@ -84,12 +84,14 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         requestAnimationFrame(() => {
           element.classList.add("active");
         });
-        setTimeout(() => {
-          try {
-            element.removeChild(particle);
-          } catch {}
-        }, t);
-      }, 30);
+       setTimeout(() => {
+        try {
+          element.removeChild(particle);
+        } catch (error) {
+          console.error("Failed to remove particle:", error);
+        }
+      }, t);
+    }, 30);
     }
   };
   const updateEffectPosition = (element: HTMLElement) => {
