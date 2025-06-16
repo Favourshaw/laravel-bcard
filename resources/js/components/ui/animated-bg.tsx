@@ -1,12 +1,20 @@
-
 import { motion } from 'framer-motion';
 
-const AnimatedBg = () => {
+interface AnimatedBgProps {
+  primaryColor: string; // example: "#1e3a8a"
+}
+
+const AnimatedBg = ({ primaryColor }: AnimatedBgProps) => {
   return (
     <div className="fixed inset-0 z-10 overflow-hidden">
-     
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900" />
-      
+      {/* Gradient background with dynamic primary color */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to bottom right, black, ${primaryColor}, indigo)`
+        }}
+      />
+
       <motion.div
         className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
         animate={{
@@ -20,7 +28,7 @@ const AnimatedBg = () => {
           ease: "linear"
         }}
       />
-      
+
       <motion.div
         className="absolute top-3/4 right-1/4 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl"
         animate={{
@@ -34,7 +42,7 @@ const AnimatedBg = () => {
           ease: "linear"
         }}
       />
-      
+
       <motion.div
         className="absolute top-1/2 right-1/3 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl"
         animate={{
@@ -47,9 +55,8 @@ const AnimatedBg = () => {
           ease: "linear"
         }}
       />
-      
-     
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+
+      <div className="absolute inset-0 bg-transparent opacity-30" />
     </div>
   );
 };
