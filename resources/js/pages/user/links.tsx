@@ -1,5 +1,6 @@
 import AnimatedBg from '@/components/ui/animated-bg';
 import { UsersPgProps } from '@/types/userPgProps';
+import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, MailIcon } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaTiktok, FaTwitter, FaWhatsapp } from 'react-icons/fa';
@@ -129,6 +130,7 @@ export default function Links({ profileData }: UsersPgProps) {
 
     return (
         <div className="relative min-h-screen">
+            <Head title={`${user.name} - Links`} />
             <AnimatedBg primaryColor={primaryColor} />
 
             <div className="relative z-10">
