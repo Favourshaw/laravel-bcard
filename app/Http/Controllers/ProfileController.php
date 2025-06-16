@@ -60,7 +60,9 @@ class ProfileController extends Controller
     {
         $user->load('profile');
 
-        $view = Route::currentRouteName() === 'user.links' ? 'user/links' : 'user/business';
+        $route = Route::currentRouteName();
+
+        $view = $route === 'profiles.links' ? 'user/links' : 'user/business';
 
         return Inertia::render($view, [
             'profileData' => [

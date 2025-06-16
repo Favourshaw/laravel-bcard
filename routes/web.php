@@ -59,10 +59,14 @@ Route::get('/tests', function () {
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
 //alway put wildcard routes at the bottom
+// For the business view (user/business)
 Route::get('{user:username}', [ControllersProfileController::class, 'info'])
-    ->name('profiles.info');
+    ->name('profiles.business');
+
+// For the links view (user/links)
 Route::get('{user:username}/links', [ControllersProfileController::class, 'info'])
-    ->name('profiles.info');
+    ->name('profiles.links');
+
 Route::fallback(function () {
     return Inertia::render('notFound');
 });
