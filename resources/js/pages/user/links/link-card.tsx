@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Link2 } from 'lucide-react';
+import { Check, Copy, Link2 } from 'lucide-react';
+import { useState } from 'react';
 
 interface LinkCardProps {
     title: string;
@@ -10,6 +11,20 @@ interface LinkCardProps {
 }
 
 const LinkCard = ({ title, description, image, url, delay }: LinkCardProps) => {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        try {
+            await navigator.clipboard.writeText(url.toString());
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy', err);
+        }
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -20,16 +35,16 @@ const LinkCard = ({ title, description, image, url, delay }: LinkCardProps) => {
             className="group relative overflow-hidden"
         >
             <motion.a
-                href={url}
+                href={url.toString()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mx-auto block w-full max-w-md rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-lg transition-all duration-300 hover:bg-white/15 hover:shadow-2xl"
+                className="mx-auto block w-full max-w-md rounded-2xl border border-white/20 bg-white/10 p-4 shadow-xl backdrop-blur-lg transition-all duration-300 hover:bg-white/15 hover:shadow-2xl"
                 whileHover={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
             >
                 <div className="flex items-center space-x-4">
                     <div className="relative">
                         <motion.div
-                            className="h-16 w-16 overflow-hidden rounded-xl shadow-lg"
+                            className="h-10 w-10 overflow-hidden rounded-xl shadow-lg"
                             whileHover={{ rotate: 5 }}
                             transition={{ type: 'spring', stiffness: 300 }}
                         >
@@ -53,13 +68,14 @@ const LinkCard = ({ title, description, image, url, delay }: LinkCardProps) => {
                         <p className="line-clamp-2 text-sm text-gray-300 transition-colors duration-300 group-hover:text-gray-200">{description}</p>
                     </div>
 
-                    <motion.div
+                    <motion.button
+                        onClick={handleCopy}
                         className="text-white/50 transition-colors duration-300 group-hover:text-white/80"
-                        whileHover={{ x: 5 }}
+                        whileHover={{ scale: 1.1 }}
                         transition={{ type: 'spring', stiffness: 400 }}
                     >
-                        <Link2 size={20} />
-                    </motion.div>
+                        {copied ? <Check size={20} className="text-green-400" /> : <Copy size={20} />}
+                    </motion.button>
                 </div>
             </motion.a>
         </motion.div>

@@ -11,7 +11,6 @@ export default function Links({ profileData }: UsersPgProps) {
     if (!user) return null;
     const getStorageUrl = (path: string | undefined, fallback: string) => (path ? `/storage/${path.replace(/^\/?storage\//, '')}` : fallback);
     const logoUrl = getStorageUrl(profile.logo, '/storage/logos/logos.png');
-    const avatarUrl = getStorageUrl(profile.avatar, '/storage/avatars/avatar.png');
     const primaryColor: string = user.colors?.primary || '#05df72';
 
     const socialLinks = [
@@ -130,7 +129,7 @@ export default function Links({ profileData }: UsersPgProps) {
 
     return (
         <div className="relative min-h-screen">
-            <AnimatedBg />
+            <AnimatedBg primaryColor={primaryColor} />
 
             <div className="relative z-10">
                 <div className="container mx-auto max-w-2xl px-4 py-12">
