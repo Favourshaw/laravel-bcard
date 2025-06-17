@@ -6,17 +6,16 @@ import { useRef, useState } from 'react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import CircularText from '../ui/circular-text';
 import Magnet from '../ui/magnet-animation';
+import AboutBeauty from './beauty/about-beauty';
 
 const Section = ({ children, id }: { children: React.ReactNode; id: string }) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ['start end', 'end start'], // Changed offset values
+        offset: ['start end', 'end start'],
     });
 
-    // Simplified animation - only slight vertical movement
     const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-    // Keep opacity at 1 when visible
     const opacity = useTransform(scrollYProgress, [1, 0.2, 0.8, 1], [0, 1, 1, 1]);
 
     return (
@@ -57,7 +56,6 @@ export default function Beauty({ profileData }: UsersPgProps) {
             <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-white px-6 py-4 shadow-md">
                 <div className="flex items-center space-x-2">
                     <img src={logoUrl} alt="Glowix Logo" className="h-8 w-8" />
-                    <h1 className="text-2xl font-semibold">Glowix.</h1>
                 </div>
 
                 <ul className="hidden space-x-6 text-sm font-medium md:flex">
@@ -142,12 +140,7 @@ export default function Beauty({ profileData }: UsersPgProps) {
             </Section>
 
             <Section id="about">
-                <div className="mx-auto max-w-3xl rounded-lg bg-white p-8 text-center">
-                    <h2 className="mb-4 text-4xl font-semibold">About Us</h2>
-                    <p className="text-lg text-gray-700">
-                        Glowix is dedicated to helping you thrive through personalized coaching and holistic health practices.
-                    </p>
-                </div>
+                <AboutBeauty username={user.username} bname={profile.bname} color={primaryColor} description={profile.description} />
             </Section>
 
             <Section id="services">
