@@ -5,7 +5,6 @@ import { Link } from 'lucide-react';
 interface beautyProps {
     color?: string;
     description?: string;
-    bname?: string;
     username?: string;
 }
 
@@ -27,7 +26,7 @@ const imageVariants = {
     },
 };
 
-const AboutBeauty: React.FC = ({ color, description, bname, username }: beautyProps) => {
+const AboutBeauty: React.FC = ({ color, description, username }: beautyProps) => {
     return (
         <motion.section
             initial="hidden"

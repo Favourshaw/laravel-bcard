@@ -140,7 +140,7 @@ export default function Beauty({ profileData }: UsersPgProps) {
             </Section>
 
             <Section id="about">
-                <AboutBeauty username={user.username} bname={profile.bname} color={primaryColor} description={profile.description} />
+                <AboutBeauty username={user.username} color={primaryColor} description={profile.description} />
             </Section>
 
             <Section id="services">
