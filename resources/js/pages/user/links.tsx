@@ -156,7 +156,7 @@ export default function Links({ profileData }: UsersPgProps) {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 2, duration: 0.6 }}
                     >
-                        <p className="text-sm text-gray-400">Made with ❤️ using React & Framer Motion</p>
+                        <p className="text-sm text-gray-400">Made with ❤️ by XIRCAR</p>
                     </motion.footer>
                 </div>
             </div>
