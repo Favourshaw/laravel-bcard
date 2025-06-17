@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 
 interface AnimatedBgProps {
-  primaryColor: string; // example: "#1e3a8a"
+  primaryColor: string; 
 }
 
 const AnimatedBg = ({ primaryColor }: AnimatedBgProps) => {
   return (
     <div className="fixed inset-0 z-10 overflow-hidden">
-      {/* Gradient background with dynamic primary color */}
+    
       <div
         className="absolute inset-0"
         style={{
