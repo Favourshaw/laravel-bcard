@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BrainCog, ChartNoAxesColumnIncreasing, CircleUser, Headset, LayoutGrid, PencilRuler } from 'lucide-react';
+import { BrainCog, ChartNoAxesColumnIncreasing, CircleUser, Globe2Icon, Headset, LayoutGrid, PencilRuler } from 'lucide-react';
 import AppLogo from './app-logo';
 export function AppSidebar() {
     const { auth } = usePage().props;
@@ -21,6 +21,12 @@ export function AppSidebar() {
             title: 'Design Template',
             href: '/template',
             icon: PencilRuler,
+        },
+
+        {
+            title: 'My Website',
+            href: '/customize',
+            icon: Globe2Icon,
         },
 
         {
@@ -54,7 +60,6 @@ export function AppSidebar() {
     let roleBasedNavItems = [...mainNavItems];
 
     if (userRole.includes('admin')) {
-        // More flexible check
         roleBasedNavItems = [...roleBasedNavItems, ...adminNavItems];
     }
 
