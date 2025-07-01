@@ -59,7 +59,7 @@ export function HomeNav() {
     const navRef = useRef<HTMLElement>(null);
 
     return (
-        <header className="sticky top-0 z-50 bg-white/80 shadow-sm backdrop-blur-md">
+        <header className="sticky top-0 z-50 bg-white shadow-sm backdrop-blur-md">
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-3">
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex-shrink-0">
