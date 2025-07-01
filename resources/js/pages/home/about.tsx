@@ -16,7 +16,7 @@ export default function About() {
     return (
         <HomeLayout>
             <Head title="About" />
-            <section className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-center bg-white px-4 text-center">
+            <section className="mx-auto flex max-w-7xl flex-col items-center justify-center bg-white px-4 pt-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}

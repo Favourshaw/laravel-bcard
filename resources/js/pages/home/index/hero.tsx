@@ -4,7 +4,7 @@ import React from 'react';
 
 const HeroSection: React.FC = () => {
     return (
-        <section className="mt-10 flex flex-col items-center justify-center bg-white px-4 text-center">
+        <section className="flex flex-col items-center justify-center bg-white px-4 pt-10 text-center">
             <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
