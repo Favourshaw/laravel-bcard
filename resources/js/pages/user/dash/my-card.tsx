@@ -96,7 +96,7 @@ export default function MyCard() {
                     exit={{ rotateY: -90, opacity: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <Link href="#" className="flex flex-col items-center justify-between gap-3">
+                    <Link href="/template" className="flex flex-col items-center justify-between gap-3">
                         <div>
                             <svg width="47" height="46" viewBox="0 0 47 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="23.5" cy="23" r="23" fill="#001F3F" />
