@@ -18,6 +18,7 @@ class UserThemeController extends Controller
             'colors.text' => 'required|string',
         ]);
 
+
         $user = auth()->user();
 
         $user->update([
