@@ -1,8 +1,8 @@
 import AppLayout from '@/layouts/app-layout';
+import { BreadcrumbItem } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
-import Business from './business';
+import React, { useRef, useState } from 'react';
 
 const themes = ['retro', 'minimal', 'modern', 'fitness', 'personal1', 'personal2', 'food', 'business', 'beauty'];
 
@@ -14,16 +14,29 @@ const defaultColors = {
 
 export default function Customize({ user }) {
     const [showModal, setShowModal] = useState(false);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+    const [iframeKey, setIframeKey] = useState(0);
 
     const { data, setData, post, processing } = useForm({
         theme: user.theme || 'business',
         colors: user.colors || defaultColors,
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const generateIframeUrl = () => {
+        return (
+            `${window.location.origin}/${user.username}?theme=${data.theme}` +
+            `&primary=${encodeURIComponent(data.colors.primary)}` +
+            `&secondary=${encodeURIComponent(data.colors.secondary)}` +
+            `&text=${encodeURIComponent(data.colors.text)}`
+        );
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('customize.update'));
+        await post(route('customize.update'));
         setShowModal(false);
+        // Force iframe reload after save
+        setIframeKey((prev) => prev + 1);
     };
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -35,11 +48,17 @@ export default function Customize({ user }) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Profile" />
+            <Head title={`${user.name} `} />
             <div className="relative h-screen w-full overflow-hidden bg-white">
                 {/* Fullscreen Theme Preview */}
                 <div className="absolute inset-0 overflow-auto">
-                    <Business profileData={{ user: { ...user, theme: data.theme, colors: data.colors } }} isOwner={true} />
+                    <iframe
+                        key={iframeKey}
+                        ref={iframeRef}
+                        src={generateIframeUrl()}
+                        className="absolute inset-0 h-full w-full border-none"
+                        title="Live Preview"
+                    />
                 </div>
 
                 {/* Floating Buttons */}
@@ -57,7 +76,7 @@ export default function Customize({ user }) {
                     {/* Share Button */}
                     <motion.button
                         onClick={() => {
-                            const url = `${window.location.origin}/${user.username}`;
+                            const url = `${window.location.origin}/${user.username}/links`;
                             navigator.clipboard.writeText(url);
                             alert('🔗 Link copied to clipboard!');
                         }}
@@ -155,7 +174,7 @@ export default function Customize({ user }) {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>{' '}
+            </div>
         </AppLayout>
     );
 }
