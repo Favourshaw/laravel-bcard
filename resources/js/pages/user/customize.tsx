@@ -42,6 +42,7 @@ export default function Customize({ user }) {
                     <Business profileData={{ user: { ...user, theme: data.theme, colors: data.colors } }} isOwner={true} />
                 </div>
 
+                {/* Floating Buttons */}
                 <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
                     {/* Customize Button */}
                     <motion.button
@@ -56,7 +57,7 @@ export default function Customize({ user }) {
                     {/* Share Button */}
                     <motion.button
                         onClick={() => {
-                            const url = window.location.href;
+                            const url = `${window.location.origin}/${user.username}`;
                             navigator.clipboard.writeText(url);
                             alert('🔗 Link copied to clipboard!');
                         }}
@@ -66,6 +67,16 @@ export default function Customize({ user }) {
                     >
                         🔗 Share
                     </motion.button>
+
+                    {/* Edit Page Link */}
+                    <motion.a
+                        href="profiles/edits"
+                        className="rounded-full bg-gray-700 px-5 py-3 text-white shadow-lg hover:bg-gray-800"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        ✏️ Edit Info
+                    </motion.a>
                 </div>
 
                 {/* Modal */}
