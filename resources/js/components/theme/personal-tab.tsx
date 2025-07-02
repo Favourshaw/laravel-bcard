@@ -105,7 +105,7 @@ export default function Personal1({ profileData }: UsersPgProps) {
                         transition={{ type: 'tween' }}
                         className="fixed top-0 left-0 z-50 flex h-full w-64 flex-col items-center border-r bg-white p-6 md:static md:block md:flex md:h-auto md:w-64"
                     >
-                        <img src={logoUrl} alt="Alex Smith" className="h-24 w-24 rounded-full object-cover" />
+                        <img src={logoUrl} alt="logo" className="h-24 w-24 rounded-full object-cover" />
                         <h1 className="mt-4 text-center text-xl font-bold">{profile.bname} </h1>
                         <nav className="mt-8 w-full">
                             {tabs.map((item) => (
