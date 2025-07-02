@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const themes = ['retro', 'minimal', 'modern', 'fitness', 'personal1', 'personal2', 'food', 'business', 'beauty'];
 
@@ -14,6 +14,8 @@ const defaultColors = {
 
 export default function Customize({ user }) {
     const [showModal, setShowModal] = useState(false);
+
+    const [showPreviewNotice, setShowPreviewNotice] = useState(true);
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const [iframeKey, setIframeKey] = useState(0);
 
@@ -21,6 +23,13 @@ export default function Customize({ user }) {
         theme: user.theme || 'business',
         colors: user.colors || defaultColors,
     });
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowPreviewNotice(false);
+        }, 12000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const generateIframeUrl = () => {
         return (
@@ -49,8 +58,59 @@ export default function Customize({ user }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`${user.name} `} />
+
+            <AnimatePresence>
+                {showPreviewNotice && (
+                    <motion.div
+                        className="fixed top-4 left-1/2 z-50 -translate-x-1/2 transform"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div className="flex items-center rounded-lg bg-yellow-100 p-4 text-yellow-800 shadow-lg">
+                            <div className="mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                                    />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="font-medium">You're viewing a preview</p>
+                                <p className="text-sm">
+                                    This is not your live page. Changes won't be visible to others until saved.{' '}
+                                    <b>
+                                        Also not that some features will not work properly, kindly view the original page with the link below to
+                                        confirm before sharing
+                                    </b>
+                                </p>
+                                <a
+                                    href={`/${user.username}`}
+                                    className="mt-1 block text-sm font-medium text-yellow-600 hover:text-yellow-800"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View live page →
+                                </a>
+                            </div>
+                            <button onClick={() => setShowPreviewNotice(false)} className="ml-4 text-yellow-600 hover:text-yellow-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className="relative h-screen w-full overflow-hidden bg-white">
-                {/* Fullscreen Theme Preview */}
                 <div className="absolute inset-0 overflow-auto">
                     <iframe
                         key={iframeKey}
@@ -61,9 +121,7 @@ export default function Customize({ user }) {
                     />
                 </div>
 
-                {/* Floating Buttons */}
                 <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
-                    {/* Customize Button */}
                     <motion.button
                         onClick={() => setShowModal(true)}
                         className="rounded-full bg-blue-600 px-5 py-3 text-white shadow-lg hover:bg-blue-700"
@@ -73,7 +131,6 @@ export default function Customize({ user }) {
                         🎨 Customize
                     </motion.button>
 
-                    {/* Share Button */}
                     <motion.button
                         onClick={() => {
                             const url = `${window.location.origin}/${user.username}/links`;
@@ -87,7 +144,6 @@ export default function Customize({ user }) {
                         🔗 Share
                     </motion.button>
 
-                    {/* Edit Page Link */}
                     <motion.a
                         href="profiles/edits"
                         className="rounded-full bg-gray-700 px-5 py-3 text-white shadow-lg hover:bg-gray-800"
@@ -98,7 +154,6 @@ export default function Customize({ user }) {
                     </motion.a>
                 </div>
 
-                {/* Modal */}
                 <AnimatePresence>
                     {showModal && (
                         <motion.div
