@@ -1,5 +1,6 @@
+import { User } from '@/types';
 import { motion } from 'framer-motion';
-import { Briefcase, CreditCard, Eye, Globe, Globe2, QrCode, QrCodeIcon, User } from 'lucide-react';
+import { Briefcase, CreditCard, Eye, Globe, Globe2, QrCode, QrCodeIcon, UserIcon } from 'lucide-react';
 
 type InfoCard = {
     icon: React.ReactNode;
@@ -7,22 +8,26 @@ type InfoCard = {
     value: string | number | React.ReactNode;
 };
 
-const data: InfoCard[] = [
-    { icon: <User />, label: 'Name', value: 'Gabriel Prosper' },
-    { icon: <CreditCard />, label: 'Card type', value: 'Personal' },
-    { icon: <Globe />, label: 'URL', value: 'www.Gabrielprosper.com' },
-    {
-        icon: <QrCode />,
-        label: 'QR code',
-        value: <img src="/path/to/qr.png" alt="QR Code" className="h-6 w-6" />,
-    },
-    { icon: <Eye />, label: 'No. of visits', value: 500 },
-    { icon: <QrCodeIcon />, label: 'No. of QR scan', value: 200 },
-    { icon: <Globe2 />, label: 'No. of visit via URL', value: 300 },
-    { icon: <Briefcase />, label: 'Plan', value: 'Free' },
-];
+interface UserMenuContentProps {
+    user: User;
+}
 
-export default function DashInfo() {
+export default function DashInfo({ user }: UserMenuContentProps) {
+    // Example data, replace with actual user data
+    const data: InfoCard[] = [
+        { icon: <UserIcon />, label: 'Name', value: user.name || 'Gabriel Prosper' },
+        { icon: <CreditCard />, label: 'Card type', value: 'Personal' },
+        { icon: <Globe />, label: 'URL', value: 'www.Gabrielprosper.com' },
+        {
+            icon: <QrCode />,
+            label: 'QR code',
+            value: <img src="/path/to/qr.png" alt="QR Code" className="h-6 w-6" />,
+        },
+        { icon: <Eye />, label: 'No. of visits', value: 500 },
+        { icon: <QrCodeIcon />, label: 'No. of QR scan', value: 200 },
+        { icon: <Globe2 />, label: 'No. of visit via URL', value: 300 },
+        { icon: <Briefcase />, label: 'Plan', value: 'Free' },
+    ];
     return (
         <div className="w-full overflow-x-auto">
             <div className="flex w-[750px] flex-wrap gap-4 p-4 md:w-full">
