@@ -17,7 +17,7 @@ export default function DashInfo({ user }: UserMenuContentProps) {
     const data: InfoCard[] = [
         { icon: <UserIcon />, label: 'Name', value: user.name || 'Gabriel Prosper' },
         { icon: <CreditCard />, label: 'Card type', value: 'Personal' },
-        { icon: <Globe />, label: 'URL', value: 'www.Gabrielprosper.com' },
+        { icon: <Globe />, label: 'URL', value: `showcase.com/${user.username}` },
         {
             icon: <QrCode />,
             label: 'QR code',
