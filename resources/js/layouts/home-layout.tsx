@@ -1,5 +1,6 @@
 // layouts/app/app-header-layout.tsx
 import { HomeNav } from '@/components/home-nav';
+import Preloader from '@/components/ui/preloader';
 import { type BreadcrumbItem } from '@/types';
 import { AnimatePresence, motion } from 'motion/react';
 import React from 'react';
@@ -20,6 +21,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children, breadcrumbs = [] }) =
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
                 >
+                    <Preloader />
                     <HomeNav />
 
                     <main className="min-h-screen bg-white">
