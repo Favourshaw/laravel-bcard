@@ -16,7 +16,7 @@ export default function Dashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+            <div className="flex h-full max-w-7xl flex-1 flex-col gap-4 rounded-xl p-4">
                 <DashInfo user={auth.user} />
                 <div className="">
                     <div className="text-muted p-4 text-base">Your card details</div>

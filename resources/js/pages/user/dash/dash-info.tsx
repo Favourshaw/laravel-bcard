@@ -1,6 +1,6 @@
+import { User } from '@/types';
 import { motion } from 'framer-motion';
 import { Briefcase, CreditCard, Eye, Globe, Globe2, QrCode, QrCodeIcon, UserIcon } from 'lucide-react';
-import { PageProps } from 'node_modules/@inertiajs/core/types/types';
 
 type InfoCard = {
     icon: React.ReactNode;
@@ -8,13 +8,8 @@ type InfoCard = {
     value: string | number | React.ReactNode;
 };
 
-interface UserMenuContentProps extends PageProps {
-    user: {
-        profile?: {
-            qr?: string;
-            instagram?: string;
-        };
-    };
+interface UserMenuContentProps {
+    user: User;
 }
 
 const getStorageUrl = (path: string | undefined, defaultImage: string) => {
@@ -23,9 +18,6 @@ const getStorageUrl = (path: string | undefined, defaultImage: string) => {
     return `/storage/${cleanedPath}`;
 };
 export default function DashInfo({ user }: UserMenuContentProps) {
-    const profile = user?.profile ?? {};
-    const qrUrl = getStorageUrl(profile?.qr ?? '', '/qrcodes/5.png');
-
     // Example data, replace with actual user data
     const data: InfoCard[] = [
         { icon: <UserIcon />, label: 'Name', value: user.name || 'Gabriel Prosper' },
@@ -34,7 +26,7 @@ export default function DashInfo({ user }: UserMenuContentProps) {
         {
             icon: <QrCode />,
             label: 'QR code',
-            value: <img src={qrUrl} alt="QR Code" className="h-6 w-6" />,
+            value: <img src="#" alt="QR Code" className="h-6 w-6" />,
         },
         { icon: <Eye />, label: 'No. of visits', value: 500 },
         { icon: <QrCodeIcon />, label: 'No. of QR scan', value: 200 },
@@ -50,9 +42,7 @@ export default function DashInfo({ user }: UserMenuContentProps) {
                         whileHover={{ scale: 1.02 }}
                         className="flex min-w-fit flex-nowrap items-center justify-start gap-2 rounded-md border border-gray-200 bg-white px-4 py-3 shadow-sm lg:min-w-[280px]"
                     >
-                        <span className="text-gray-700">
-                            {item.icon} {profile.instagram}
-                        </span>
+                        <span className="text-gray-700">{item.icon}</span>
                         <div className="flex flex-row flex-nowrap items-center gap-2">
                             <span className="text-xs font-medium text-gray-600">{item.label}</span>
                             <span className="text-sm font-semibold text-gray-800">
