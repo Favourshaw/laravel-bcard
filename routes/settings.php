@@ -18,4 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
+    Route::get('settings/pricing', function () {
+        return Inertia::render('settings/pricing');
+    })->name('pricing');
 });
