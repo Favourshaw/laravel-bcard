@@ -45,19 +45,19 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                 <aside className="w-full max-w-xl lg:w-48">
                     <nav className="flex flex-col space-y-1 space-x-0">
                         {sidebarNavItems.map((item, index) => (
-                            <Button
-                                key={`${item.href}-${index}`}
-                                size="sm"
-                                variant="ghost"
-                                asChild
-                                className={cn('w-full justify-start', {
-                                    'bg-muted': currentPath === item.href,
-                                })}
-                            >
-                                <Link href={item.href} prefetch>
+                            <Link href={item.href} prefetch>
+                                {' '}
+                                <Button
+                                    key={`${item.href}-${index}`}
+                                    size="sm"
+                                    asChild
+                                    className={cn('w-full justify-start', {
+                                        'bg-muted': currentPath === item.href,
+                                    })}
+                                >
                                     {item.title}
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         ))}
                     </nav>
                 </aside>
